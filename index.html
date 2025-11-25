@@ -1,429 +1,890 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Support Playlists – The Space Around Care</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Support Playlists – quiet, non-clinical navigation intelligence for the space around care." />
+  <meta charset="UTF-8">
+  <title>Support Playlists – The space around care</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Google Font for modern headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f6f4f2;
-      --bg-soft: #f0ece7;
-      --text-main: #2f2f30;
-      --text-soft: #4a4a4c;
-      --accent: #d4b98a;
-      --signal: #6ea8a1;
-      --border-subtle: rgba(0, 0, 0, 0.05);
-      --max-width: 760px;
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --bg-card: #0f172a;
+      --bg-chip: rgba(148, 163, 184, 0.12);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --text-muted: #6b7280;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.9);
+      --shadow-subtle: 0 14px 40px rgba(15, 23, 42, 0.7);
+      --max-width: 1040px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
-
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #fdfbf8 0, var(--bg) 40%);
-      font-family: "Inter", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 60%, #020617 100%);
       color: var(--text-main);
-      line-height: 1.7;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
     }
 
-    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-    header { padding: 32px 20px 16px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    .nav {
+    main {
+      padding: 24px 16px 60px;
+    }
+
+    .page {
       max-width: var(--max-width);
       margin: 0 auto;
+    }
+
+    /* Top bar and nav */
+
+    .top-bar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--text-soft);
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
     }
 
-    .brand {
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-weight: 500;
-      font-size: 13px;
+    .top-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .nav-links { display: flex; gap: 18px; font-size: 13px; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-soft);
-      padding-bottom: 2px;
-      position: relative;
-    }
-
-    main { flex: 1; padding: 12px 20px 60px; }
-    .container { max-width: var(--max-width); margin: 0 auto; }
-
-    /* HERO */
-    .hero { padding: 40px 0 32px; border-bottom: 1px solid var(--border-subtle); }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-family: "Fraunces", serif;
-      font-size: clamp(32px, 6vw, 40px);
-      line-height: 1.1;
-      margin: 0 0 12px;
-    }
-
-    .hero-subtitle {
-      font-size: 16px;
-      color: var(--text-soft);
-      max-width: 30rem;
-    }
-
-    .tagline {
+    .brand-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 16px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #a3e635);
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.85);
+    }
+
+    .brand-name {
       font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--text-soft);
     }
 
-    .pill {
-      padding: 4px 11px;
+    .nav {
+      display: flex;
+      gap: 6px;
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav a {
+      font-size: 12px;
+      padding: 6px 11px;
       border-radius: 999px;
-      background: rgba(212, 185, 138, 0.18);
-      border: 1px solid rgba(212, 185, 138, 0.5);
-      font-size: 11px;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      font-weight: 500;
+      color: var(--text-soft);
+      white-space: nowrap;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(15, 23, 42, 0.95);
       color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .nav a.nav-primary {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.65), rgba(59, 130, 246, 0.3));
+      color: #0b1120;
+      font-weight: 500;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    /* Hero */
+
+    .hero {
+      margin-bottom: 40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 28px;
+      padding: 26px 24px 22px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.22) 0, transparent 52%),
+        radial-gradient(circle at bottom, rgba(59, 130, 246, 0.24) 0, transparent 55%),
+        linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 15% -10%, rgba(248, 250, 252, 0.04), transparent 55%);
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      padding-right: 8px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 10px;
+    }
+
+    .eyebrow-badge {
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #38bdf8);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+    }
+
+    h1 {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
+      color: #f9fafb;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      max-width: 32rem;
+    }
+
+    .hero-lede {
+      font-size: 14px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      max-width: 32rem;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .hero-tagline strong {
+      color: var(--text-main);
+      font-weight: 500;
     }
 
     .hero-visual {
-      display: block;
-      margin: 28px auto 6px;
-      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .orbit-card {
       width: 100%;
-      height: auto;
-      border-radius: 20px;
+      max-width: 280px;
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(248, 250, 252, 0.25), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.35), rgba(15, 23, 42, 1));
+      box-shadow: var(--shadow-subtle);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orbit-layer {
+      position: absolute;
+      inset: 12%;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+    }
+
+    .orbit-layer:nth-child(2) {
+      inset: 24%;
+      border-style: solid;
+      border-color: rgba(56, 189, 248, 0.6);
+    }
+
+    .orbit-layer:nth-child(3) {
+      inset: 36%;
+      border-style: solid;
+      border-color: rgba(148, 163, 184, 0.65);
+    }
+
+    .orbit-pill {
+      position: absolute;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .orbit-pill.center {
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #f9fafb;
+      border-color: rgba(248, 250, 252, 0.7);
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .orbit-pill.top {
+      top: 20%;
+      left: 14%;
+    }
+
+    .orbit-pill.right {
+      top: 50%;
+      right: 6%;
+      transform: translateY(-50%);
+    }
+
+    .orbit-pill.bottom {
+      bottom: 18%;
+      left: 25%;
     }
 
     .hero-caption {
-      text-align: center;
-      font-size: 13px;
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: 18rem;
+      text-align: right;
+    }
+
+    /* Sections */
+
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    section {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-subtle);
+      padding: 20px 18px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.06), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .section-header {
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 18px;
+      margin: 2px 0 4px;
+      letter-spacing: -0.02em;
+      color: #f9fafb;
+    }
+
+    .eyebrow-small {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    .section-note {
+      font-size: 12px;
       color: var(--text-soft);
       margin-top: 4px;
     }
 
-    section {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    h2 {
-      font-family: "Fraunces", serif;
-      font-size: 22px;
-      margin: 0 0 10px;
-    }
-
-    .section-label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-bottom: 14px;
-    }
-
-    p { margin: 0 0 12px; font-size: 15px; color: var(--text-soft); }
-    .emphasis { font-weight: 500; color: var(--text-main); }
-
-    .list-block { margin: 12px 0 4px; padding-left: 18px; }
-    .list-block li { margin: 4px 0; }
-
-    .soft-panel {
-      background: var(--bg-soft);
-      border-radius: 18px;
-      padding: 16px;
-      margin-top: 12px;
-    }
-
-    .signals-tag {
+    .section-visual {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .mood-card {
+      width: 100%;
+      max-width: 240px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background:
+        radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%),
+        linear-gradient(150deg, rgba(30, 64, 175, 0.95), rgba(15, 118, 110, 0.92));
+      padding: 13px 12px;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mood-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e0f2fe;
+      margin-bottom: 4px;
+    }
+
+    .mood-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .mood-tag {
+      font-size: 11px;
+      padding: 3px 7px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border: 1px solid rgba(191, 219, 254, 0.65);
+    }
+
+    .mood-text {
+      font-size: 12px;
+      color: #e5f3ff;
+      max-width: 16rem;
+    }
+
+    .mood-orbit {
+      position: absolute;
+      inset: -30%;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.25);
+      opacity: 0.4;
+    }
+
+    .mood-orbit:nth-child(2) {
+      inset: -10%;
+      border-color: rgba(125, 211, 252, 0.3);
+    }
+
+    .mood-orbit:nth-child(3) {
+      inset: 10%;
+      border-color: rgba(45, 212, 191, 0.3);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
       gap: 6px;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      margin-bottom: 8px;
+      justify-content: flex-end;
     }
 
-    .signals-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--signal);
-      border-radius: 50%;
-    }
-
-    .contact-block { margin-top: 10px; font-size: 14px; }
-
-    .contact-block a {
-      color: var(--signal);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(110, 168, 161, 0.4);
-    }
-
-    footer {
-      padding: 26px 20px;
-      background: #f3efea;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    footer .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      font-size: 12px;
+    .chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-chip);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       color: var(--text-soft);
+    }
+
+    /* Who section variant */
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    .team-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .team-list li {
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer span {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .footer-legal {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-legal strong {
+      font-weight: 500;
+      color: var(--text-soft);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 840px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px 16px 18px;
+      }
+
+      .hero-visual {
+        align-items: center;
+      }
+
+      .hero-caption {
+        text-align: center;
+      }
+
+      .section-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .section-visual {
+        align-items: center;
+      }
+
+      .mood-card {
+        max-width: 100%;
+      }
+
+      .who-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      main {
+        padding: 18px 12px 40px;
+      }
+
+      .hero-inner {
+        border-radius: 20px;
+      }
+
+      section {
+        padding: 16px 14px 14px;
+      }
+
+      h1 {
+        font-size: 1.65rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="page">
-
-    <header>
-      <div class="nav">
-        <div class="brand">Support Playlists</div>
-        <nav class="nav-links">
-          <a href="#what">What it is</a>
+  <main>
+    <div class="page">
+      <header class="top-bar">
+        <div class="top-brand">
+          <div class="brand-chip">
+            <span class="brand-dot"></span>
+            <span>Quiet tools for neighbourhood health</span>
+          </div>
+          <div class="brand-name">Neighbourhood CoLab</div>
+        </div>
+        <nav class="nav" aria-label="Page sections">
+          <a href="#what" class="nav-primary">What it is</a>
           <a href="#space">Space around care</a>
           <a href="#category">New category</a>
           <a href="#now">Now</a>
           <a href="#who">Who</a>
         </nav>
-      </div>
-    </header>
+      </header>
 
-    <main>
-      <div class="container">
+      <!-- Hero -->
 
-        <!-- HERO -->
-        <section class="hero" id="top">
-          <div class="eyebrow">Neighbourhood CoLab</div>
-          <h1 class="hero-title">Quiet intelligence for the space around care.</h1>
-
-          <p class="hero-subtitle">
-            Support Playlists help people say what is going on, then receive a simple, human playlist of support.
-            One calm place to start. No searching. No forms. No filters.
-          </p>
-
-          <div class="tagline">
-            <span class="pill">Non-clinical navigation intelligence</span>
-            <span>Designed for residents, families and neighbourhoods.</span>
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <div class="eyebrow-badge"></div>
+              <span>Support Playlists</span>
+            </div>
+            <h1 id="hero-heading">Quiet intelligence for the space around care.</h1>
+            <p class="hero-subtitle">
+              Support Playlists help people say what is going on, then receive a simple, human playlist of support.
+              One calm place to start. No searching. No forms. No filters.
+            </p>
+            <p class="hero-lede">
+              Non clinical navigation intelligence, designed for residents, families and neighbourhoods.
+            </p>
+            <p class="hero-tagline">
+              <strong>The intention is simple.</strong> Give people one place to start, with a small number of
+              well chosen options that make sense for their life and their local area.
+            </p>
           </div>
 
-          <img src="support-playlists.png"
-     alt="Support Playlists as a quiet layer around clinical care and everyday life"
-     class="hero-visual" />
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbit-card">
+              <div class="orbit-layer"></div>
+              <div class="orbit-layer"></div>
+              <div class="orbit-layer"></div>
 
+              <div class="orbit-pill center">Support Playlists</div>
+              <div class="orbit-pill top">Everyday life</div>
+              <div class="orbit-pill right">Clinical care</div>
+              <div class="orbit-pill bottom">Family, friends and neighbourhood</div>
+            </div>
+            <p class="hero-caption">
+              Support Playlists as a quiet layer around clinical care and everyday life.
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <p class="hero-caption">
-            Support Playlists as a quiet layer around clinical care and everyday life.
-          </p>
-        </section>
+      <!-- Content sections -->
 
-        <!-- WHAT -->
+      <div class="sections">
+
         <section id="what">
-          <div class="section-label">What Support Playlists are</div>
-          <h2>One playlist. The most relevant support.</h2>
+          <div class="section-inner">
+            <div>
+              <div class="section-header">
+                <div class="eyebrow-small">What Support Playlists are</div>
+                <h2>One playlist. The most relevant support.</h2>
+              </div>
+              <p>
+                A Support Playlist brings together the most relevant local, national and digital options in one place.
+                It responds to how a person describes what is going on in their own words.
+              </p>
+              <p>
+                It is not a search engine. It is not a symptom checker. It is not another app to download.
+                It is a calm guide into the right kind of help.
+              </p>
+              <p>Support Playlists can hold many different situations:</p>
+              <ul>
+                <li>feeling low, stressed or overwhelmed</li>
+                <li>loneliness or disconnection</li>
+                <li>worries about money, food or housing</li>
+                <li>family pressures or relationship strain</li>
+                <li>grief, change or uncertainty</li>
+              </ul>
+            </div>
 
-          <p>
-            A Support Playlist brings together the most relevant local, national and digital options in one place.
-            It responds to how a person describes what is going on in their own words.
-          </p>
-
-          <p>
-            It is not a search engine. It is not a symptom checker. It is not another app to download.
-            It is a calm guide into the right kind of help.
-          </p>
-
-          <p>Support Playlists can hold many different situations:</p>
-
-          <ul class="list-block">
-            <li>feeling low, stressed or overwhelmed</li>
-            <li>loneliness or disconnection</li>
-            <li>worries about money, food or housing</li>
-            <li>family pressures or relationship strain</li>
-            <li>grief, change or uncertainty</li>
-          </ul>
-
-          <div class="soft-panel">
-            <p><strong>The intention is simple.</strong> Give people one place to start, with a small number of well-chosen options that make sense for their life and their local area.</p>
+            <div class="section-visual">
+              <div class="mood-card">
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-title">One calm place to start</div>
+                <div class="mood-tags">
+                  <span class="mood-tag">No searching</span>
+                  <span class="mood-tag">No forms</span>
+                  <span class="mood-tag">No filters</span>
+                </div>
+                <p class="mood-text">
+                  A Support Playlist feels like a human sitting beside you, gathering a few well chosen options that fit your life.
+                </p>
+              </div>
+              <div class="chip-row">
+                <div class="chip">Local, national and digital</div>
+                <div class="chip">Written in ordinary language</div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- SPACE -->
         <section id="space">
-          <div class="section-label">The space around care</div>
-          <h2>Before care. After care. Often missed.</h2>
+          <div class="section-inner">
+            <div>
+              <div class="section-header">
+                <div class="eyebrow-small">The space around care</div>
+                <h2>Before care. After care. Often missed.</h2>
+              </div>
+              <p>
+                Most of the difficulty happens just before and just after clinical care.
+              </p>
+              <p>
+                There is a moment before, when someone is trying to understand what is happening
+                and decide what to do next. And a moment after, when they are trying to recover,
+                adjust or get back on their feet.
+              </p>
+              <p>
+                These moments sit outside formal clinical pathways. They are emotional, practical and social.
+                Support Playlists live in this space around care. They hold the entry moment and the
+                recovery moment, surrounding clinical care with context, continuity and connection.
+              </p>
+            </div>
 
-          <p>
-            Most of the difficulty happens just before and just after clinical care.
-          </p>
-
-          <p>
-            There is a moment before, when someone is trying to understand what is happening and decide what to do next.
-            And a moment after, when they are trying to recover, adjust or get back on their feet.
-          </p>
-
-          <p>
-            These moments sit outside formal clinical pathways. They are emotional, practical and social.
-          </p>
-
-          <p>
-            Support Playlists live in this <span class="emphasis">space around care</span>.
-            They hold the entry moment and the recovery moment, surrounding clinical care with context, continuity and connection.
-          </p>
+            <div class="section-visual">
+              <div class="mood-card" style="background:
+                radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%),
+                linear-gradient(145deg, rgba(37, 99, 235, 0.98), rgba(79, 70, 229, 0.95));">
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-title">The moments in between</div>
+                <p class="mood-text">
+                  Support Playlists notice the space before care and after care, when people are often most unsure,
+                  most alone and most likely to fall through the gaps.
+                </p>
+              </div>
+              <div class="chip-row">
+                <div class="chip">Entry moments</div>
+                <div class="chip">Recovery moments</div>
+                <div class="chip">Context and continuity</div>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- WHY -->
-        <section id="why">
-          <div class="section-label">Why this matters</div>
-          <h2>Reducing friction. Preventing gaps.</h2>
-
-          <p>
-            Many people fall into the gaps between community life and clinical care.
-            Support may exist, but it is scattered, hard to see or difficult to navigate.
-          </p>
-
-          <p>
-            The emotional and cognitive effort needed to find help often stops people even trying.
-          </p>
-
-          <p>Support Playlists reduce that friction. They:</p>
-
-          <ul class="list-block">
-            <li>help people move with more confidence</li>
-            <li>support resilience, early intervention and prevention</li>
-            <li>give context and practical support around clinical care</li>
-            <li>make better use of what already exists in neighbourhoods</li>
-          </ul>
-        </section>
-
-        <!-- CATEGORY -->
         <section id="category">
-          <div class="section-label">A new category</div>
-          <h2>A new layer in health and care.</h2>
+          <div class="section-inner">
+            <div>
+              <div class="section-header">
+                <div class="eyebrow-small">Why this matters</div>
+                <h2>Reducing friction. Preventing gaps.</h2>
+              </div>
+              <p>
+                Many people fall into the gaps between community life and clinical care. Support may exist,
+                but it is scattered, hard to see or difficult to navigate.
+              </p>
+              <p>
+                The emotional and cognitive effort needed to find help often stops people even trying.
+              </p>
+              <p>
+                Support Playlists reduce that friction. They:
+              </p>
+              <ul>
+                <li>help people move with more confidence</li>
+                <li>support resilience, early intervention and prevention</li>
+                <li>give context and practical support around clinical care</li>
+                <li>make better use of what already exists in neighbourhoods</li>
+              </ul>
+              <div class="section-note">
+                Support Playlists introduce a new layer around existing services.
+                They do not replace clinical care or assess symptoms.
+              </div>
+            </div>
 
-          <p>
-            Support Playlists introduce a new layer around existing services.
-            They do not replace clinical care or assess symptoms.
-          </p>
-
-          <p>
-            This work sits in a new category:
-            <span class="emphasis">non-clinical navigation intelligence</span>.
-          </p>
-
-          <div class="soft-panel">
-            <p><strong>Emotional Architecture.</strong> Support Playlists are part of a wider approach to designing AI systems that are emotionally safe, culturally fluent and centred on the lived reality of the person in front of them.</p>
+            <div class="section-visual">
+              <div class="mood-card" style="background:
+                radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%),
+                linear-gradient(150deg, rgba(14, 116, 144, 0.96), rgba(5, 150, 105, 0.96));">
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-title">A new category</div>
+                <p class="mood-text">
+                  This work sits in a new category: non clinical navigation intelligence.
+                  It is part of Emotional Architecture, designing AI systems that are emotionally safe,
+                  culturally fluent and centred on the lived reality of the person in front of them.
+                </p>
+              </div>
+              <div class="chip-row">
+                <div class="chip">Non clinical navigation intelligence</div>
+                <div class="chip">Emotional Architecture</div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- SIGNALS -->
-        <section id="signals">
-          <div class="signals-tag">
-            <span class="signals-dot"></span>
-            <span>Neighbourhood Signals</span>
-          </div>
-
-          <h2>Seeing early signals in the neighbourhood.</h2>
-
-          <p>
-            Support Playlists can connect to Neighbourhood Signals, a gentle layer that notices early shifts in need, interest and worry.
-            Always anonymous. Always community first.
-          </p>
-        </section>
-
-        <!-- NOW -->
         <section id="now">
-          <div class="section-label">What is happening now</div>
-          <h2>Grounded work in real places.</h2>
+          <div class="section-inner">
+            <div>
+              <div class="section-header">
+                <div class="eyebrow-small">What is happening now</div>
+                <h2>Grounded work in real places.</h2>
+              </div>
+              <p>
+                Support Playlists are being developed using the real context of Weymouth and Portland.
+                The digital work at Primary Care Network level is a live model for the kinds of journeys
+                and neighbourhood infrastructure Support Playlists will connect into.
+              </p>
+              <p>Current work includes:</p>
+              <ul>
+                <li>mapping the moments before and after care where people struggle most</li>
+                <li>using the Weymouth and Portland PCN digital offer as a reference model</li>
+                <li>conversations with clinicians, voluntary sector partners and residents</li>
+                <li>exploring how Support Playlists sit alongside emerging smart triage systems</li>
+                <li>ongoing development of Emotional Architecture</li>
+              </ul>
+            </div>
 
-          <p>
-            Support Playlists are being developed using the real context of Weymouth and Portland.
-            The digital work at Primary Care Network level is a live model for the kinds of journeys and neighbourhood infrastructure Support Playlists will connect into.
-          </p>
-
-          <p>Current work includes:</p>
-
-          <ul class="list-block">
-            <li>mapping the moments before and after care where people struggle most</li>
-            <li>using the Weymouth & Portland PCN digital offer as a reference model</li>
-            <li>conversations with clinicians, voluntary sector partners and residents</li>
-            <li>exploring how Support Playlists sit alongside emerging smart triage systems</li>
-            <li>ongoing development of Emotional Architecture</li>
-          </ul>
+            <div class="section-visual">
+              <div class="mood-card" style="background:
+                radial-gradient(circle at top, rgba(248, 250, 252, 0.12), transparent 60%),
+                linear-gradient(155deg, rgba(30, 64, 175, 0.96), rgba(8, 47, 73, 0.98));">
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-orbit"></div>
+                <div class="mood-title">Neighbourhood Signals</div>
+                <p class="mood-text">
+                  Support Playlists can connect to Neighbourhood Signals, a gentle layer that notices
+                  early shifts in need, interest and worry. Always anonymous. Always community first.
+                </p>
+              </div>
+              <div class="chip-row">
+                <div class="chip">Early signals in the neighbourhood</div>
+                <div class="chip">Anonymous by design</div>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <!-- WHO -->
         <section id="who">
-          <div class="section-label">Who is behind it</div>
-          <h2>Neighbourhood CoLab.</h2>
+          <div class="who-grid">
+            <div>
+              <div class="section-header">
+                <div class="eyebrow-small">Who is behind it</div>
+                <h2>Neighbourhood CoLab.</h2>
+              </div>
+              <p>
+                Support Playlists were created by Mark Winterburn,
+                Digital and Transformation Lead and Architect of Support Playlists at Neighbourhood CoLab.
+              </p>
+              <p>
+                Mark's work explores the future of intelligent triage, Emotional Architecture, neighbourhood health
+                and early stage AI systems that try to understand the human in front of them.
+              </p>
+            </div>
 
-          <p>
-            Support Playlists were created by <span class="emphasis">Mark Winterburn</span>,
-            Digital & Transformation Lead | Architect of Support Playlists @ Neighbourhood CoLab.
-          </p>
+            <div>
+              <p class="section-header" style="margin-bottom: 6px;">
+                The work is supported by a small team with deep human services experience:
+              </p>
+              <ul class="team-list">
+                <li><strong>Dr Bruce Fernie</strong> Psychologist, over 25 years in the NHS</li>
+                <li><strong>Lucy Champion</strong> Nurse, over 25 years in the NHS</li>
+                <li><strong>Justin Jones</strong> Social Worker, over 25 years of experience</li>
+              </ul>
+              <p class="section-note" style="margin-top: 10px;">
+                Together, they provide the emotional scaffolding that underpins the design, safety and integrity of the work.
+              </p>
+            </div>
+          </div>
 
-          <p>
-            Mark's work explores the future of intelligent triage, Emotional Architecture, neighbourhood health,
-            and early-stage AI systems that try to understand the human in front of them.
-          </p>
+          <div class="footer">
+            <span>For conversations, collaboration or research enquiries:</span>
+            <span><a href="mailto:hello@neighbourhoodcolab.co.uk">hello@neighbourhoodcolab.co.uk</a></span>
+            <span><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a></span>
 
-          <p>The work is supported by a small team with deep human-services experience:</p>
-
-          <ul class="list-block">
-            <li><strong>Dr Bruce Fernie</strong> – Psychologist, over 25 years in the NHS</li>
-            <li><strong>Lucy Champion</strong> – Nurse, over 25 years in the NHS</li>
-            <li><strong>Justin Jones</strong> – Social Worker, over 25 years of experience</li>
-          </ul>
-
-          <p>Together, they provide the emotional scaffolding that underpins the design, safety and integrity of the work.</p>
-
-          <div class="contact-block">
-            For conversations, collaboration or research enquiries:<br>
-            <a href="mailto:hello@neighbourhoodcolab.co.uk">hello@neighbourhoodcolab.co.uk</a><br>
-            <a href="https://www.linkedin.com/in/mark-winterburn-08a614351/" target="_blank">LinkedIn</a>
+            <div class="footer-legal">
+              <span>© Underground Mutton CIC, Company No. 16375654, operating as Neighbourhood CoLab.</span>
+              <span><strong>Support Playlists</strong>, <strong>Demand Shaping Intelligence</strong>,
+                <strong>Non Clinical Navigation Intelligence</strong>, <strong>Neighbourhood Signals</strong>
+                and <strong>Emotional Architecture</strong> are original concepts created by Mark Winterburn.</span>
+            </div>
           </div>
         </section>
 
       </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-inner">
-        <p><strong>© Underground Mutton CIC</strong> — Company No. 16375654 — Operating as Neighbourhood CoLab</p>
-        <p>
-          Support Playlists, Demand Shaping Intelligence, Non-Clinical Navigation Intelligence, Neighbourhood Signals and Emotional Architecture
-          are original concepts created by <strong>Mark Winterburn</strong>.
-        </p>
-      </div>
-    </footer>
-
-  </div>
+    </div>
+  </main>
 </body>
 </html>
