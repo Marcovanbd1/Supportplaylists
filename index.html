@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Support Playlists – Quiet tools for neighbourhood health</title>
+  <title>Support Playlists</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Support Playlists are simple, human sets of options that help people find the right kind of support at the right time."
+  />
   <style>
     :root {
-      --bg-body: #0f172a;
-      --bg-panel: #111827;
-      --bg-panel-soft: #111827;
-      --bg-accent: linear-gradient(135deg, #a5b4fc, #7dd3fc);
-      --bg-accent-soft: linear-gradient(135deg, rgba(165,180,252,0.25), rgba(125,211,252,0.15));
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --text-soft: #cbd5f5;
-      --card-bg: rgba(15,23,42,0.95);
-      --card-border: rgba(148,163,184,0.4);
+      --bg: #f7fafc;
+      --bg-soft: #ffffff;
+      --accent: #4b9fff;
+      --accent-soft: #e1f0ff;
+      --accent-strong: #2563eb;
+      --accent-secondary: #10b981;
+      --text-main: #0f172a;
+      --text-soft: #64748b;
+      --border-subtle: #e2e8f0;
+      --card-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 24px;
       --radius-lg: 18px;
-      --radius-xl: 28px;
-      --shadow-soft: 0 24px 60px rgba(15,23,42,0.8);
-      --max-width: 1024px;
-      --gap-section: 5rem;
+      --radius-pill: 999px;
+      --max-width: 1040px;
     }
 
     * {
@@ -32,784 +35,967 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f7fafc 40%, #f9fafb 100%);
       color: var(--text-main);
-      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    main {
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(
+        to bottom,
+        rgba(247, 250, 252, 0.92),
+        rgba(247, 250, 252, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-    }
-
-    section {
-      margin-bottom: var(--gap-section);
-    }
-
-    h1, h2, h3 {
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-
-    h1 {
-      font-size: clamp(2.25rem, 3vw, 3rem);
-      line-height: 1.1;
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 2.6vw, 2.2rem);
-      margin-bottom: 0.75rem;
-    }
-
-    h3 {
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    p.lead {
-      font-size: 1.05rem;
-      color: var(--text-soft);
-      max-width: 40rem;
-    }
-
-    .muted {
-      color: var(--text-muted);
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .pill {
-      display: inline-flex;
+      padding: 14px 20px;
+      display: flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.35);
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 40%;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #bfdbfe 45%, #60a5fa 100%);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-tagline {
+      font-size: 12px;
       color: var(--text-soft);
-      font-size: 0.78rem;
     }
 
-    .pill span {
-      font-size: 0.9rem;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
     }
 
-    /* HERO */
-
-    .hero {
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-soft);
+      padding: 6px 0;
       position: relative;
-      border-radius: 32px;
-      padding: 2.75rem 2.4rem;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(129,140,248,0.35), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(56,189,248,0.3), transparent 55%),
-        var(--bg-panel);
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 2.4rem;
-      align-items: center;
     }
 
-    /* abstract soft overlay */
-    .hero::before {
+    .nav-links a::after {
       content: "";
       position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at top left, rgba(191,219,254,0.2), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(129,140,248,0.2), transparent 55%);
-      opacity: 1;
-      pointer-events: none;
-    }
-
-    .hero-content,
-    .hero-visual {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-title {
-      margin-bottom: 1rem;
-    }
-
-    .hero-buttons {
-      margin-top: 1.75rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .btn {
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
       border-radius: 999px;
-      border: none;
-      padding: 0.7rem 1.3rem;
-      font-size: 0.9rem;
-      cursor: pointer;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      transition: width 0.18s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .chip {
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 12px;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 40% 30%, #ffffff, #34d399);
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.18);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 36px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-label {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      text-decoration: none;
+      gap: 8px;
+      border-radius: var(--radius-pill);
+      padding: 4px 10px 4px 4px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      width: fit-content;
+    }
+
+    .hero-label-pill {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #1e293b;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .hero-label-text {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .hero-heading {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-heading span {
+      background: linear-gradient(120deg, var(--accent-strong), var(--accent-secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 540px;
+    }
+
+    .hero-subtitle strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
     }
 
     .btn-primary {
-      background: var(--bg-accent);
-      color: #020617;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-strong), #60a5fa);
+      color: #ffffff;
+      box-shadow: 0 18px 30px rgba(37, 99, 235, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary span {
+      font-size: 16px;
+    }
+
+    .btn-secondary {
+      border-radius: var(--radius-pill);
+      padding: 9px 16px;
+      font-size: 13px;
       font-weight: 500;
-      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
     }
 
-    .btn-ghost {
-      background: rgba(15,23,42,0.85);
-      color: var(--text-soft);
-      border: 1px solid rgba(148,163,184,0.45);
+    .btn-secondary span {
+      font-size: 14px;
     }
 
-    .hero-visual-card {
-      background: rgba(15,23,42,0.92);
-      border-radius: 24px;
-      padding: 1.5rem 1.4rem;
-      border: 1px solid rgba(148,163,184,0.5);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-visual-card h4 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-visual-card p {
-      font-size: 0.9rem;
+    .hero-footnote {
+      margin-top: 8px;
+      font-size: 12px;
       color: var(--text-soft);
     }
 
-    .hero-visual-tags {
+    .hero-right {
+      position: relative;
+    }
+
+    .mock {
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--card-shadow);
+      padding: 16px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 1rem;
-    }
-
-    .hero-tag {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.4);
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 12px;
       color: var(--text-soft);
     }
 
-    /* GENERIC LAYOUTS */
-
-    .two-column {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 2.75rem;
+    .mock-dots {
+      display: flex;
+      gap: 4px;
       align-items: center;
     }
 
-    .panel {
-      border-radius: var(--radius-xl);
-      padding: 2.25rem 2rem;
-      background: radial-gradient(circle at top left, rgba(148,163,184,0.18), transparent 55%),
-                  var(--bg-panel);
-      border: 1px solid rgba(148,163,184,0.35);
+    .mock-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #e5e7eb;
     }
 
-    .panel-soft {
-      border-radius: var(--radius-xl);
-      padding: 2.25rem 2rem;
-      background: var(--bg-panel-soft);
-      border: 1px solid rgba(148,163,184,0.25);
+    .mock-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
     }
 
-    .panel-alt {
-      border-radius: var(--radius-xl);
-      padding: 2.25rem 2rem;
-      background: radial-gradient(circle at top, rgba(56,189,248,0.14), transparent 60%),
-                  #020617;
-      border: 1px solid rgba(30,64,175,0.6);
+    .mock-tag {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
-    .kicker {
-      font-size: 0.82rem;
+    .mock-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .mock-chat {
+      padding-right: 6px;
+      border-right: 1px dashed rgba(203, 213, 225, 0.9);
+    }
+
+    .bubble {
+      border-radius: 14px;
+      padding: 8px 11px;
+      font-size: 12px;
+      line-height: 1.5;
+      max-width: 100%;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+
+    .bubble-user {
+      background: #0f172a;
+      color: #e5e7eb;
+      margin-left: auto;
+      border-top-right-radius: 4px;
+    }
+
+    .bubble-ai {
+      background: #eef2ff;
+      border-top-left-radius: 4px;
+      color: #111827;
+    }
+
+    .bubble-ai span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bubble-ai span small {
+      font-size: 10px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mock-playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .playlist-card {
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 9px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .playlist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .playlist-name {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .playlist-chip {
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: #dcfce7;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #166534;
+    }
+
+    .playlist-items {
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    .playlist-items strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .mock-metadata {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: var(--radius-pill);
+      padding: 6px 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+    }
+
+    .mock-metadata span:first-child {
+      font-weight: 500;
+    }
+
+    .mock-metadata small {
+      font-size: 10px;
+      opacity: 0.9;
+    }
+
+    section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 20px 40px;
+    }
+
+    .section-header {
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 0.45rem;
+      color: #94a3b8;
+      margin-bottom: 4px;
     }
 
-    /* QUIET LAYER SECTION */
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .section-description {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 520px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 12px 30px rgba(148, 163, 184, 0.14);
+    }
+
+    .card-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1rem;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .pill-large {
-      flex: 1 1 150px;
-      padding: 0.9rem 1.1rem;
-      border-radius: 999px;
-      background: var(--bg-accent-soft);
-      border: 1px solid rgba(191,219,254,0.55);
-      font-size: 0.9rem;
+    .pill {
+      border-radius: var(--radius-pill);
+      padding: 5px 11px;
+      font-size: 11px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+      white-space: nowrap;
+    }
+
+    .pill-soft {
+      background: #ecfdf3;
+      color: #166534;
+      border-color: rgba(187, 247, 208, 0.9);
+    }
+
+    .pill-neutral {
+      background: #f3f4f6;
+      color: #4b5563;
+      border-color: #e5e7eb;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .list {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .list ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 6px;
+    }
+
+    .list li {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .list-bullet {
+      margin-top: 5px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
+      flex-shrink: 0;
+    }
+
+    .list li span {
+      flex: 1;
+    }
+
+    footer {
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 18px 20px 26px;
+      background: rgba(248, 250, 252, 0.95);
+      margin-top: 10px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
       color: var(--text-soft);
     }
 
-    /* WHAT IT IS SECTION */
-
-    .three-cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .mini-card {
-      border-radius: var(--radius-lg);
-      padding: 1rem 1rem;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: rgba(15,23,42,0.9);
-      font-size: 0.87rem;
+    .footer-inner a {
       color: var(--text-soft);
-    }
-
-    .mini-card-title {
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-    }
-
-    ul {
-      padding-left: 1.1rem;
-      margin-top: 0.75rem;
-      color: var(--text-soft);
-      font-size: 0.95rem;
-    }
-
-    ul li + li {
-      margin-top: 0.25rem;
-    }
-
-    /* ABSTRACT PANEL (replaces photo) */
-
-    .image-panel {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      background: radial-gradient(circle at 60% 40%, rgba(99,102,241,0.25), rgba(15,23,42,1) 70%);
-      border: 1px solid rgba(148,163,184,0.4);
-      min-height: 260px;
-    }
-
-    .image-panel::before {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(165,180,252,0.4), rgba(99,102,241,0.15), transparent 70%);
-      filter: blur(28px);
-    }
-
-    .image-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        120deg,
-        transparent 20%,
-        rgba(125,211,252,0.25) 50%,
-        transparent 80%
-      );
-      opacity: 0.25;
-      mix-blend-mode: screen;
-    }
-
-    /* MOMENTS IN BETWEEN */
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 1.5rem;
-    }
-
-    .timeline-step {
-      padding: 0.95rem 1rem;
-      border-radius: 999px;
-      background: var(--bg-accent-soft);
-      border: 1px solid rgba(191,219,254,0.7);
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .timeline-step span {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-    }
-
-    /* WHY IT MATTERS */
-
-    .split {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 3fr);
-      gap: 2rem;
-      margin-top: 1.25rem;
-    }
-
-    .badge {
-      margin-top: 1.25rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.65);
-      font-size: 0.82rem;
-      color: var(--text-soft);
-    }
-
-    .pill-toggle-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.35rem;
-    }
-
-    .pill-toggle {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.55);
-      font-size: 0.85rem;
-      color: var(--text-soft);
-    }
-
-    /* CURRENT WORK / SIGNALS */
-
-    .grid-5 {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-soft);
-    }
-
-    .grid-5 div {
-      padding-right: 0.4rem;
-    }
-
-    .signals-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.3rem;
-    }
-
-    .signals-pill {
-      padding: 0.7rem 1.15rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.65);
-      font-size: 0.85rem;
-      color: var(--text-soft);
-    }
-
-    /* WHO / TEAM */
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .team-card {
-      border-radius: var(--radius-xl);
-      padding: 1.2rem 1.2rem 1.4rem;
-      background:
-        radial-gradient(circle at top left, rgba(129,140,248,0.35), transparent 55%),
-        rgba(15,23,42,0.96);
-      border: 1px solid rgba(191,219,254,0.7);
-      color: var(--text-soft);
-    }
-
-    .team-card h4 {
-      font-size: 0.98rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .team-card .role {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .footer-note {
-      margin-top: 1.8rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .footer-note strong {
-      font-weight: 500;
-    }
-
-    .contact-row {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-
-    .contact-row a {
       text-decoration: none;
-      color: var(--text-soft);
     }
 
-    /* RESPONSIVE */
+    .footer-inner a:hover {
+      text-decoration: underline;
+    }
 
-    @media (max-width: 880px) {
-      main {
-        padding: 2.4rem 1.2rem 3rem;
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 24px;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding-inline: 14px;
+      }
+
+      .nav-links {
+        display: none;
       }
 
       .hero {
-        grid-template-columns: minmax(0,1fr);
-        padding: 2.1rem 1.7rem;
+        padding-inline: 14px;
       }
 
-      .two-column,
-      .split {
+      section {
+        padding-inline: 14px;
+      }
+
+      .grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .three-cards {
-        grid-template-columns: minmax(0,1fr);
-      }
-
-      .timeline {
+      .two-column {
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .grid-5 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .team-grid {
-        grid-template-columns: minmax(0,1fr);
+      .mock-metadata {
+        position: static;
+        transform: none;
+        margin-top: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <main>
-
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <span class="pill"><span>●</span> Quiet tools for neighbourhood health</span>
-        <h1 class="hero-title">Support Playlists help people say what is going on, then receive a simple, human playlist of support.</h1>
-        <p class="lead">
-          One calm place to start. No searching. No forms. No filters.
-          Non clinical navigation intelligence, designed for residents, families and neighbourhoods.
-        </p>
-        <div class="hero-buttons">
-          <a href="#what-it-is" class="btn btn-primary">What it is</a>
-          <a href="#now" class="btn btn-ghost">See what is happening now</a>
+  <div class="page">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <div class="brand-text">
+            <div class="brand-name">Support Playlists</div>
+            <div class="brand-tagline">Support that fits real life</div>
+          </div>
         </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-visual-card">
-          <h4>The intention is simple.</h4>
-          <p>
-            Give people one place to start, with a small number of well chosen options
-            that make sense for their life and their local area.
-          </p>
-          <div class="hero-visual-tags">
-            <span class="hero-tag">Neighbourhood health</span>
-            <span class="hero-tag">Early support</span>
-            <span class="hero-tag">Calm navigation</span>
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#examples">Examples</a>
+          <a href="#partners">For NHS and partners</a>
+          <div class="chip">
+            <div class="chip-dot"></div>
+            <span>Non clinical. Human. Local first.</span>
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- QUIET LAYER -->
-    <section id="quiet-layer">
-      <div class="two-column">
-        <div>
-          <div class="kicker">Support Playlists</div>
-          <h2>Quiet intelligence for the space around care.</h2>
-          <p class="muted">
-            Support Playlists sit as a quiet layer around clinical care and everyday life.
-            They listen to how people describe what is happening,
-            then gather a simple, human playlist of support.
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-label">
+            <div class="hero-label-pill">Early access concept</div>
+            <div class="hero-label-text">A new way to guide people to support</div>
+          </div>
+
+          <h1 class="hero-heading">
+            Not an app. Not a search bar.<br />
+            <span>Just the right support, in one playlist.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Support Playlists turn what someone says into a small, human set of options.  
+            <strong>Easy to understand. Easy to act on. Easy to share.</strong>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#examples" class="btn-primary">
+              Try a playlist example <span>↗</span>
+            </a>
+            <a href="#partners" class="btn-secondary">
+              For NHS and local partners <span>●</span>
+            </a>
+          </div>
+          <p class="hero-footnote">
+            Designed for everyday situations. From feeling low or anxious, to money worries or caring for someone at home.
           </p>
         </div>
-        <div class="panel-soft">
-          <p class="muted">Support Playlists as a quiet layer around:</p>
-          <div class="pill-row">
-            <div class="pill-large">
-              Everyday life
-              <span>●</span>
+
+        <div class="hero-right">
+          <div class="mock">
+            <div class="mock-header">
+              <div class="mock-dots">
+                <div class="mock-dot"></div>
+                <div class="mock-dot"></div>
+                <div class="mock-dot"></div>
+              </div>
+              <div class="mock-title">Support Playlist</div>
+              <div class="mock-tag">Example view</div>
             </div>
-            <div class="pill-large">
-              Clinical care
-              <span>●</span>
+            <div class="mock-body">
+              <div class="mock-chat">
+                <div class="bubble bubble-user">
+                  I am not sleeping, and money is really tight this month.
+                </div>
+                <div class="bubble bubble-ai">
+                  <span>
+                    Here is a Support Playlist that could help.
+                    <small>Curated, not clinical advice</small>
+                  </span>
+                </div>
+              </div>
+              <div class="mock-playlist">
+                <div class="playlist-card">
+                  <div class="playlist-header">
+                    <div class="playlist-name">1. Immediate support tonight</div>
+                    <div class="playlist-chip">Now</div>
+                  </div>
+                  <div class="playlist-items">
+                    <strong>Samaritans 116 123</strong> if you are feeling overwhelmed.  
+                    <br />NHS Every Mind Matters sleep tools.  
+                    <br />Short breathing audio to help calm your body.
+                  </div>
+                </div>
+                <div class="playlist-card">
+                  <div class="playlist-header">
+                    <div class="playlist-name">2. This week</div>
+                    <div class="playlist-chip">Local</div>
+                  </div>
+                  <div class="playlist-items">
+                    <strong>Weymouth and Portland Citizens Advice</strong> for benefits and debt options.  
+                    <br />Local welfare support and food access if you are short on money.  
+                    <br />Free online CBT tools to help with worry.
+                  </div>
+                </div>
+                <div class="playlist-card">
+                  <div class="playlist-header">
+                    <div class="playlist-name">3. Over the next month</div>
+                    <div class="playlist-chip">Follow up</div>
+                  </div>
+                  <div class="playlist-items">
+                    Ask your GP team about a medication review if sleep is still difficult.  
+                    <br />Plan a check in with someone you trust.  
+                    <br />Keep a simple sleep and worry diary to share if you need more support.
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="pill-large">
-              Family, friends and neighbourhood
-              <span>●</span>
+            <div class="mock-metadata">
+              <span>Feels like a person who knows the system.</span>
+              <small>Built with human guidance and AI, not left to an algorithm alone.</small>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- WHAT IT IS -->
-    <section id="what-it-is">
-      <div class="panel">
-        <div class="kicker">What Support Playlists are</div>
-        <h2>One playlist. The most relevant support.</h2>
-        <p>
-          A Support Playlist brings together the most relevant local, national and digital options in one place.
-          It responds to how a person describes what is going on in their own words.
-        </p>
-        <p class="muted" style="margin-top:0.75rem;">
-          It is not a search engine. It is not a symptom checker. It is not another app to download.
-          It is a calm guide into the right kind of help.
-        </p>
-
-        <ul>
-          <li>feeling low, stressed or overwhelmed</li>
-          <li>loneliness or disconnection</li>
-          <li>worries about money, food or housing</li>
-          <li>family pressures or relationship strain</li>
-          <li>grief, change or uncertainty</li>
-        </ul>
-
-        <div class="three-cards">
-          <div class="mini-card">
-            <div class="mini-card-title">One calm place to start</div>
-            <div>No searching. No forms. No filters.</div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-title">Like a human beside you</div>
-            <div>
-              A Support Playlist feels like a human sitting beside you, gathering a few well chosen options that fit your life.
-            </div>
-          </div>
-          <div class="mini-card">
-            <div class="mini-card-title">Local, national and digital</div>
-            <div>Written in ordinary language, bringing together what already exists.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SPACE AROUND CARE -->
-    <section id="space-around-care">
-      <div class="two-column">
-        <div>
-          <div class="kicker">The space around care</div>
-          <h2>Before care. After care. Often missed.</h2>
-          <p>
-            Most of the difficulty happens just before and just after clinical care.
-          </p>
-          <p class="muted" style="margin-top:0.6rem;">
-            There is a moment before, when someone is trying to understand what is happening and decide what to do next.
-            And a moment after, when they are trying to recover, adjust or get back on their feet.
-          </p>
-          <p class="muted" style="margin-top:0.6rem;">
-            These moments sit outside formal clinical pathways. They are emotional, practical and social.
-            Support Playlists live in this space around care.
-            They hold the entry moment and the recovery moment, surrounding clinical care with context, continuity and connection.
+      <!-- How it works -->
+      <section id="how-it-works">
+        <div class="section-header">
+          <div class="section-kicker">How it works</div>
+          <h2 class="section-title">From what someone says, to a Support Playlist</h2>
+          <p class="section-description">
+            Support Playlists sit between daily life and clinical care. They do not diagnose. They help people see a path.
           </p>
         </div>
-        <div class="image-panel" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- MOMENTS IN BETWEEN -->
-    <section id="moments">
-      <div class="panel-soft">
-        <h2>The moments in between</h2>
-        <p class="muted">
-          Support Playlists notice the space before care and after care,
-          when people are often most unsure, most alone and most likely to fall through the gaps.
-        </p>
-        <div class="timeline">
-          <div class="timeline-step">
-            <span>Entry moments</span>
-            People are unsure what to do next. Support Playlists provide context and continuity.
+        <div class="grid">
+          <div class="card">
+            <div class="card-kicker">Step 1</div>
+            <div class="card-title">Listen to the real story</div>
+            <div class="card-body">
+              Someone types or speaks in their own words.  
+              No medical language needed.  
+              <br /><br />
+              The system listens for patterns. Mood. Safety. Money. Caring. Housing. Connection.
+            </div>
           </div>
-          <div class="timeline-step">
-            <span>Clinical care</span>
-            Clinical pathways, decisions and treatment sit at the centre.
+          <div class="card">
+            <div class="card-kicker">Step 2</div>
+            <div class="card-title">Curate, do not overwhelm</div>
+            <div class="card-body">
+              Instead of a long list of links, the person receives a short playlist.  
+              Immediate options. Local options. Follow up.  
+              <br /><br />
+              Always grounded in real services. Local, national, digital.
+            </div>
           </div>
-          <div class="timeline-step">
-            <span>Recovery moments</span>
-            Daily life resumes. Risk of isolation or relapse is highest. Support Playlists hold this moment.
+          <div class="card">
+            <div class="card-kicker">Step 3</div>
+            <div class="card-title">Share and return</div>
+            <div class="card-body">
+              Each playlist can be saved, shared, and updated.  
+              With a friend. A family member. A support worker.  
+              <br /><br />
+              It becomes a living plan rather than a single leaflet.
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- WHY THIS MATTERS -->
-    <section id="why">
-      <div class="panel-alt">
-        <div class="kicker">Why this matters</div>
-        <h2>Reducing friction. Preventing gaps.</h2>
-        <div class="split">
-          <div>
-            <p>
-              Many people fall into the gaps between community life and clinical care.
-              Support may exist, but it is scattered, hard to see or difficult to navigate.
-            </p>
-            <p class="muted" style="margin-top:0.6rem;">
-              The emotional and cognitive effort needed to find help often stops people even trying.
-            </p>
+      <!-- Examples -->
+      <section id="examples">
+        <div class="section-header">
+          <div class="section-kicker">Examples</div>
+          <h2 class="section-title">Designed for the situations we meet every week</h2>
+          <p class="section-description">
+            Support Playlists can sit inside the NHS App, practice websites, community hubs, or local campaigns.
+          </p>
+        </div>
+
+        <div class="two-column" style="margin-bottom: 26px;">
+          <div class="card">
+            <div class="card-kicker">Scenario</div>
+            <div class="card-title">Feeling low or anxious</div>
+            <div class="card-body">
+              A Support Playlist might include:
+              <div class="pill-row">
+                <span class="pill">Safe urgent support if you feel at risk</span>
+                <span class="pill">Local talking therapy or mental health support</span>
+                <span class="pill-soft">Everyday steps you can try yourself</span>
+                <span class="pill-neutral">When to contact your GP team</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <p><strong>Support Playlists reduce that friction. They:</strong></p>
+          <div class="list">
+            <strong>People do not need to know the right clinical term.</strong>  
+            They just need somewhere to start.  
             <ul>
-              <li>help people move with more confidence</li>
-              <li>support resilience, early intervention and prevention</li>
-              <li>give context and practical support around clinical care</li>
-              <li>make better use of what already exists in neighbourhoods</li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Respectful language that does not label the person.  
+                  Focused on what might help today and over the next few weeks.
+                </span>
+              </li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Makes clear when to seek urgent help, and when a booked appointment is needed.
+                </span>
+              </li>
             </ul>
           </div>
         </div>
-        <div class="badge">
-          <span>Support Playlists introduce a new layer around existing services. They do not replace clinical care or assess symptoms.</span>
+
+        <div class="two-column">
+          <div class="card">
+            <div class="card-kicker">Scenario</div>
+            <div class="card-title">Leaving hospital and going home</div>
+            <div class="card-body">
+              A Support Playlist might include:
+              <div class="pill-row">
+                <span class="pill">Who to phone if you are worried tonight</span>
+                <span class="pill-soft">Local voluntary support and check in services</span>
+                <span class="pill-neutral">Help with shopping, money or equipment</span>
+                <span class="pill">When to ask for more help from your GP or hospital team</span>
+              </div>
+            </div>
+          </div>
+          <div class="list">
+            <strong>Recovery is not only clinical.</strong>  
+            People also need food, friendship, and confidence.  
+            <ul>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Support Playlists give carers and family a clear picture of how to help.
+                </span>
+              </li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  They can be shared in a ward, in a GP practice, or by a volunteer on the doorstep.
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="pill-toggle-row">
-          <div class="pill-toggle">Non clinical navigation intelligence</div>
-          <div class="pill-toggle">Emotional Architecture</div>
+      </section>
+
+      <!-- Partners -->
+      <section id="partners">
+        <div class="section-header">
+          <div class="section-kicker">For NHS and local partners</div>
+          <h2 class="section-title">A new layer for smart, human triage</h2>
+          <p class="section-description">
+            Support Playlists do not replace clinical systems. They sit alongside them, making it easier for people to reach the right kind of help earlier.
+          </p>
+        </div>
+
+        <div class="two-column">
+          <div class="list">
+            <strong>Where Support Playlists can sit.</strong>
+            <ul>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Inside the NHS App, as a way to turn a typed concern into a Support Playlist.
+                </span>
+              </li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  On primary care and PCN websites, as a soft front door to non clinical support.
+                </span>
+              </li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  As QR codes in waiting rooms, libraries, schools, workplaces, and community venues.
+                </span>
+              </li>
+            </ul>
+
+            <br />
+            <strong>What this can help with.</strong>
+            <ul>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Shaping demand before it reaches clinical triage.  
+                  Some needs are better met by community, money, housing or emotional support.
+                </span>
+              </li>
+              <li>
+                <div class="list-bullet"></div>
+                <span>
+                  Giving staff a simple, trusted thing to send people. One link, many options.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-kicker">Safety and design</div>
+            <div class="card-title">Built for emotional and digital safety</div>
+            <div class="card-body">
+              Support Playlists are being developed with:
+              <ul style="list-style: none; padding-left: 0; margin-top: 8px;">
+                <li style="margin-bottom: 6px;">
+                  • Clear guard rails around clinical advice and risk.
+                </li>
+                <li style="margin-bottom: 6px;">
+                  • Local curation, so partners can shape what appears in each area.
+                </li>
+                <li style="margin-bottom: 6px;">
+                  • Plain language that fits a wide range of reading ages.
+                </li>
+                <li>
+                  • A focus on emotional tone. People should feel understood, not judged.
+                </li>
+              </ul>
+              <br />
+              To explore pilots or collaboration, you can get in touch and describe your area, population, and digital set up.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>Support Playlists · Early concept preview</div>
+        <div>
+          Built in partnership with neighbourhoods and health teams.  
+          <a href="mailto:hello@supportplaylist.co.uk">Contact</a>
         </div>
       </div>
-    </section>
-
-    <!-- WHAT IS HAPPENING NOW -->
-    <section id="now">
-      <div class="panel-soft">
-        <div class="kicker">What is happening now</div>
-        <h2>Grounded work in real places.</h2>
-        <p class="muted">
-          Support Playlists are being developed using the real context of Weymouth and Portland.
-          The digital work at Primary Care Network level is a live model for the kinds of journeys
-          and neighbourhood infrastructure Support Playlists will connect into.
-        </p>
-
-        <div class="grid-5">
-          <div>
-            <strong>01</strong><br />
-            mapping the moments before and after care where people struggle most
-          </div>
-          <div>
-            <strong>02</strong><br />
-            using the Weymouth and Portland PCN digital offer as a reference model
-          </div>
-          <div>
-            <strong>03</strong><br />
-            conversations with clinicians, voluntary sector partners and residents
-          </div>
-          <div>
-            <strong>04</strong><br />
-            exploring how Support Playlists sit alongside emerging smart triage systems
-          </div>
-          <div>
-            <strong>05</strong><br />
-            ongoing development of Emotional Architecture
-          </div>
-        </div>
-
-        <div class="kicker" style="margin-top:2rem;">Neighbourhood Signals</div>
-        <p class="muted">
-          Support Playlists can connect to Neighbourhood Signals,
-          a gentle layer that notices early shifts in need, interest and worry.
-          Always anonymous. Always community first.
-        </p>
-        <div class="signals-row">
-          <div class="signals-pill">Early signals in the neighbourhood</div>
-          <div class="signals-pill">Anonymous by design</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHO -->
-    <section id="who">
-      <div class="panel-soft">
-        <div class="kicker">Who is behind it</div>
-        <h2>Neighbourhood CoLab.</h2>
-        <p class="muted">
-          Support Playlists were created by <strong>Mark Winterburn</strong>,
-          Digital and Transformation Lead and Architect of Support Playlists at Neighbourhood CoLab.
-        </p>
-        <p class="muted" style="margin-top:0.6rem;">
-          Mark's work explores the future of intelligent triage, Emotional Architecture,
-          neighbourhood health and early stage AI systems that try to understand the human in front of them.
-        </p>
-
-        <div class="team-grid">
-          <div class="team-card">
-            <h4>Dr Bruce Fernie</h4>
-            <div class="role">Psychologist, over 25 years in the NHS</div>
-          </div>
-          <div class="team-card">
-            <h4>Lucy Champion</h4>
-            <div class="role">Nurse, over 25 years in the NHS</div>
-          </div>
-          <div class="team-card">
-            <h4>Justin Jones</h4>
-            <div class="role">Social Worker, over 25 years of experience</div>
-          </div>
-        </div>
-
-        <div class="contact-row">
-          <span>For conversations, collaboration or research enquiries:</span>
-          <a href="mailto:hello@neighbourhoodcolab.co.uk" class="btn btn-ghost">Get in touch</a>
-        </div>
-
-        <p class="footer-note">
-          © Underground Mutton CIC, Company No. 16375654, operating as Neighbourhood CoLab.
-          <strong>Support Playlists</strong>, <strong>Demand Shaping Intelligence</strong>,
-          <strong>Non Clinical Navigation Intelligence</strong>, <strong>Neighbourhood Signals</strong>
-          and <strong>Emotional Architecture</strong> are original concepts created by Mark Winterburn.
-        </p>
-      </div>
-    </section>
-
-  </main>
+    </footer>
+  </div>
 </body>
 </html>
