@@ -85,9 +85,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      color: #0f172a;
-      font-weight: 700;
+      position: relative;
+    }
+
+    /* Play icon instead of S */
+    .brand-mark::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 11px solid #0f172a;
+      margin-left: 2px;
     }
 
     .brand-text {
@@ -624,8 +633,13 @@
         padding-top: 24px;
       }
 
-      .hero-right {
+      /* On mobile, ensure hero text appears before the example mock */
+      .hero-left {
         order: -1;
+      }
+
+      .hero-right {
+        order: 0;
       }
     }
 
@@ -667,7 +681,8 @@
     <header>
       <div class="nav">
         <div class="brand">
-          <div class="brand-mark">S</div>
+          <!-- Play symbol icon -->
+          <div class="brand-mark" aria-hidden="true"></div>
           <div class="brand-text">
             <div class="brand-name">Support Playlists</div>
             <div class="brand-tagline">Support that fits real life</div>
@@ -992,7 +1007,7 @@
         <div>Support Playlists · Early concept preview</div>
         <div>
           Built in partnership with neighbourhoods and health teams.  
-          <a href="mailto:hello@supportplaylist.co.uk">Contact</a>
+          <a href="mailto:hello@neighbourhoodcolab.co.uk">Contact</a>
         </div>
       </div>
     </footer>
