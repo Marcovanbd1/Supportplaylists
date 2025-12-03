@@ -88,7 +88,7 @@
       position: relative;
     }
 
-    /* Play icon instead of S */
+    /* Play icon */
     .brand-mark::before {
       content: "";
       width: 0;
@@ -177,7 +177,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
       gap: 36px;
-      align-items: flex-start; /* key change */
+      align-items: flex-start; /* top aligned */
     }
 
     .hero-left {
@@ -448,26 +448,70 @@
       font-size: 11px;
       color: var(--text-soft);
       line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .playlist-items strong {
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 9px;
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
+    }
+
+    .playlist-item:hover {
+      background: #eff6ff;
+      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .playlist-item-main {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .playlist-item-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .playlist-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .playlist-item-text strong {
       color: var(--text-main);
       font-weight: 600;
     }
 
-    .playlist-bullet {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-      margin-bottom: 3px;
+    .playlist-item-text span {
+      font-size: 10px;
+      color: #9ca3af;
     }
 
-    .playlist-dot {
-      margin-top: 4px;
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
+    .playlist-item-arrow {
+      font-size: 12px;
+      color: #9ca3af;
       flex-shrink: 0;
     }
 
@@ -669,6 +713,19 @@
       .two-column {
         grid-template-columns: minmax(0, 1fr);
       }
+
+      /* Make Support Playlist single column on mobile to remove side gap */
+      .mock-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .mock-chat {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px dashed rgba(203, 213, 225, 0.9);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
     }
   </style>
 </head>
@@ -677,7 +734,6 @@
     <header>
       <div class="nav">
         <div class="brand">
-          <!-- Play symbol icon -->
           <div class="brand-mark" aria-hidden="true"></div>
           <div class="brand-text">
             <div class="brand-name">Support Playlists</div>
@@ -756,27 +812,45 @@
                 </div>
               </div>
               <div class="mock-playlist">
-                <!-- Right now -->
+                <!-- Tonight -->
                 <div class="playlist-card">
                   <div class="playlist-header">
                     <div class="playlist-name">
-                      <span>🌙</span> 1. Right now
+                      <span>🌙</span> 1. Tonight
                     </div>
-                    <div class="playlist-chip">Tonight</div>
+                    <div class="playlist-chip">Start here</div>
                   </div>
                   <div class="playlist-items">
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>90 second reset.</strong> A short breathing or grounding audio. Press play, close your eyes, and let your shoulders drop.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Wind down track.</strong> One calm playlist or song while you get ready for bed. Phone on charge, lights dimmed.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>If it feels too much.</strong> Call <strong>Samaritans 116 123</strong> or use NHS 111 if you feel unsafe or overwhelmed.</span>
-                    </div>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">●</div>
+                        <div class="playlist-item-text">
+                          <strong>3 minute breathing reset</strong>
+                          <span>Short audio to calm your body before bed.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">☎</div>
+                        <div class="playlist-item-text">
+                          <strong>Samaritans 116 123</strong>
+                          <span>Tap to call if it all feels too much.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">N</div>
+                        <div class="playlist-item-text">
+                          <strong>NHS 111 online</strong>
+                          <span>If you are worried about your health tonight.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
                   </div>
                 </div>
 
@@ -789,18 +863,36 @@
                     <div class="playlist-chip">Next few days</div>
                   </div>
                   <div class="playlist-items">
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>One guided sleep.</strong> Try a session from Headspace or NHS Every Mind Matters sleep tools. Choose one and repeat it for a few nights.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Gentle first ten minutes.</strong> Decide one small thing that makes mornings softer, such as a glass of water or a stretch, and protect it.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Look at one money thing.</strong> Pick a single task that feels safe enough, such as checking your balance or listing the bills that worry you most, and park the rest for now.</span>
-                    </div>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">🕊</div>
+                        <div class="playlist-item-text">
+                          <strong>Guided sleep session</strong>
+                          <span>Headspace or NHS Every Mind Matters, once each night.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">£</div>
+                        <div class="playlist-item-text">
+                          <strong>Money check in</strong>
+                          <span>Look at one bill or balance, not all of them at once.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">👤</div>
+                        <div class="playlist-item-text">
+                          <strong>Tell one trusted person</strong>
+                          <span>A short message about how your week has really been.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
                   </div>
                 </div>
 
@@ -813,18 +905,36 @@
                     <div class="playlist-chip">Next few weeks</div>
                   </div>
                   <div class="playlist-items">
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Check in with your GP team if</strong> sleep is still difficult most nights, or worry is starting to affect your day to day life.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Money and pressure.</strong> Contact <strong>Citizens Advice</strong> or local money support if bills or debt are adding to the stress, so you are not carrying it alone.</span>
-                    </div>
-                    <div class="playlist-bullet">
-                      <div class="playlist-dot"></div>
-                      <span><strong>Build a tiny routine.</strong> Choose one thing that genuinely helps you unwind and do it at roughly the same time three nights a week, so you have something steady to lean on.</span>
-                    </div>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">GP</div>
+                        <div class="playlist-item-text">
+                          <strong>Talk to your GP team</strong>
+                          <span>If sleep or worry are still affecting daily life.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">££</div>
+                        <div class="playlist-item-text">
+                          <strong>Citizens Advice or local money support</strong>
+                          <span>Help with debt, benefits, and plans for the end of the month.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
+                    <a href="#" class="playlist-item">
+                      <div class="playlist-item-main">
+                        <div class="playlist-item-icon">★</div>
+                        <div class="playlist-item-text">
+                          <strong>One small routine</strong>
+                          <span>Something that genuinely helps you unwind three nights a week.</span>
+                        </div>
+                      </div>
+                      <div class="playlist-item-arrow">›</div>
+                    </a>
                   </div>
                 </div>
               </div>
