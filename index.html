@@ -177,7 +177,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
       gap: 36px;
-      align-items: center;
+      align-items: flex-start; /* key change */
     }
 
     .hero-left {
@@ -390,6 +390,12 @@
       letter-spacing: 0.08em;
     }
 
+    .mock-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
     .mock-playlist {
       display: flex;
       flex-direction: column;
@@ -397,13 +403,13 @@
     }
 
     .playlist-card {
-      border-radius: 14px;
+      border-radius: 16px;
       background: #f9fafb;
       border: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 9px 10px;
+      padding: 9px 10px 10px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .playlist-header {
@@ -417,6 +423,13 @@
     .playlist-name {
       font-weight: 600;
       color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .playlist-name span {
+      font-size: 13px;
     }
 
     .playlist-chip {
@@ -428,6 +441,7 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #166534;
+      white-space: nowrap;
     }
 
     .playlist-items {
@@ -441,31 +455,20 @@
       font-weight: 600;
     }
 
-    .mock-metadata {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--text-soft);
-      background: rgba(15, 23, 42, 0.8);
-      border-radius: var(--radius-pill);
-      padding: 6px 10px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
-      color: #e5e7eb;
+    .playlist-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 3px;
     }
 
-    .mock-metadata span:first-child {
-      font-weight: 500;
-    }
-
-    .mock-metadata small {
-      font-size: 10px;
-      opacity: 0.9;
+    .playlist-dot {
+      margin-top: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
+      flex-shrink: 0;
     }
 
     section {
@@ -633,7 +636,6 @@
         padding-top: 24px;
       }
 
-      /* On mobile, ensure hero text appears before the example mock */
       .hero-left {
         order: -1;
       }
@@ -666,12 +668,6 @@
 
       .two-column {
         grid-template-columns: minmax(0, 1fr);
-      }
-
-      .mock-metadata {
-        position: static;
-        transform: none;
-        margin-top: 10px;
       }
     }
   </style>
@@ -717,6 +713,7 @@
           <p class="hero-subtitle">
             Support Playlists turn what someone says into a small, human set of options.  
             <strong>Easy to understand. Easy to act on. Easy to share.</strong>
+            They work from everyday concerns to more complex journeys, without needing the right clinical words.
           </p>
 
           <div class="hero-actions">
@@ -746,54 +743,91 @@
             <div class="mock-body">
               <div class="mock-chat">
                 <div class="bubble bubble-user">
-                  I am not sleeping, and money is really tight this month.
+                  I feel wired and exhausted. My head will not switch off and I start to worry about money towards the end of the month.
                 </div>
                 <div class="bubble bubble-ai">
                   <span>
-                    Here is a Support Playlist that could help.
+                    Here is a Support Playlist for nights like this.
                     <small>Curated, not clinical advice</small>
                   </span>
                 </div>
+                <div class="mock-note">
+                  You mentioned stress, sleep, and money feeling tight towards the end of the month.
+                </div>
               </div>
               <div class="mock-playlist">
+                <!-- Right now -->
                 <div class="playlist-card">
                   <div class="playlist-header">
-                    <div class="playlist-name">1. Immediate support tonight</div>
-                    <div class="playlist-chip">Now</div>
+                    <div class="playlist-name">
+                      <span>🌙</span> 1. Right now
+                    </div>
+                    <div class="playlist-chip">Tonight</div>
                   </div>
                   <div class="playlist-items">
-                    <strong>Samaritans 116 123</strong> if you are feeling overwhelmed.  
-                    <br />NHS Every Mind Matters sleep tools.  
-                    <br />Short breathing audio to help calm your body.
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>90 second reset.</strong> A short breathing or grounding audio. Press play, close your eyes, and let your shoulders drop.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Wind down track.</strong> One calm playlist or song while you get ready for bed. Phone on charge, lights dimmed.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>If it feels too much.</strong> Call <strong>Samaritans 116 123</strong> or use NHS 111 if you feel unsafe or overwhelmed.</span>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Next few days -->
                 <div class="playlist-card">
                   <div class="playlist-header">
-                    <div class="playlist-name">2. This week</div>
-                    <div class="playlist-chip">Local</div>
+                    <div class="playlist-name">
+                      <span>☀️</span> 2. Over the next few days
+                    </div>
+                    <div class="playlist-chip">Next few days</div>
                   </div>
                   <div class="playlist-items">
-                    <strong>Weymouth and Portland Citizens Advice</strong> for benefits and debt options.  
-                    <br />Local welfare support and food access if you are short on money.  
-                    <br />Free online CBT tools to help with worry.
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>One guided sleep.</strong> Try a session from Headspace or NHS Every Mind Matters sleep tools. Choose one and repeat it for a few nights.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Gentle first ten minutes.</strong> Decide one small thing that makes mornings softer, such as a glass of water or a stretch, and protect it.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Look at one money thing.</strong> Pick a single task that feels safe enough, such as checking your balance or listing the bills that worry you most, and park the rest for now.</span>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Next few weeks -->
                 <div class="playlist-card">
                   <div class="playlist-header">
-                    <div class="playlist-name">3. Over the next month</div>
-                    <div class="playlist-chip">Follow up</div>
+                    <div class="playlist-name">
+                      <span>🌱</span> 3. Over the next few weeks
+                    </div>
+                    <div class="playlist-chip">Next few weeks</div>
                   </div>
                   <div class="playlist-items">
-                    Ask your GP team about a medication review if sleep is still difficult.  
-                    <br />Plan a check in with someone you trust.  
-                    <br />Keep a simple sleep and worry diary to share if you need more support.
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Check in with your GP team if</strong> sleep is still difficult most nights, or worry is starting to affect your day to day life.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Money and pressure.</strong> Contact <strong>Citizens Advice</strong> or local money support if bills or debt are adding to the stress, so you are not carrying it alone.</span>
+                    </div>
+                    <div class="playlist-bullet">
+                      <div class="playlist-dot"></div>
+                      <span><strong>Build a tiny routine.</strong> Choose one thing that genuinely helps you unwind and do it at roughly the same time three nights a week, so you have something steady to lean on.</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="mock-metadata">
-              <span>Feels like a person who knows the system.</span>
-              <small>Built with human guidance and AI, not left to an algorithm alone.</small>
             </div>
           </div>
         </div>
@@ -817,6 +851,8 @@
               No medical language needed.  
               <br /><br />
               The system listens for patterns. Mood. Safety. Money. Caring. Housing. Connection.
+              <br /><br />
+              It understands when someone may be on a longer health journey, and shapes the support around that.
             </div>
           </div>
           <div class="card">
@@ -848,6 +884,7 @@
           <div class="section-kicker">Examples</div>
           <h2 class="section-title">Designed for the situations we meet every week</h2>
           <p class="section-description">
+            Designed for the situations we meet every week, from everyday pressures to more involved health journeys.  
             Support Playlists can sit inside the NHS App, practice websites, community hubs, or local campaigns.
           </p>
         </div>
@@ -929,6 +966,7 @@
           <h2 class="section-title">A new layer for smart, human triage</h2>
           <p class="section-description">
             Support Playlists do not replace clinical systems. They sit alongside them, making it easier for people to reach the right kind of help earlier.
+            They can also wrap around existing pathways, offering the emotional, practical and social support that clinical routes cannot hold alone.
           </p>
         </div>
 
