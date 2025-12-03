@@ -175,9 +175,9 @@
       margin: 0 auto;
       padding: 36px 20px 40px;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.25fr);
       gap: 36px;
-      align-items: flex-start; /* top aligned */
+      align-items: flex-start;
     }
 
     .hero-left {
@@ -295,23 +295,28 @@
       position: relative;
     }
 
+    /* Hero magic mock */
+
     .mock {
       border-radius: var(--radius-xl);
       background: rgba(255, 255, 255, 0.96);
       box-shadow: var(--card-shadow);
-      padding: 16px;
+      padding: 16px 16px 18px;
       border: 1px solid rgba(226, 232, 240, 0.9);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .mock-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
       font-size: 12px;
       color: var(--text-soft);
+      margin-bottom: 4px;
     }
 
     .mock-dots {
@@ -342,118 +347,177 @@
       border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
-    .mock-body {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .mock-chat {
-      padding-right: 6px;
-      border-right: 1px dashed rgba(203, 213, 225, 0.9);
-    }
-
-    .bubble {
-      border-radius: 14px;
-      padding: 8px 11px;
-      font-size: 12px;
-      line-height: 1.5;
-      max-width: 100%;
-      margin-bottom: 8px;
-      width: fit-content;
-    }
-
-    .bubble-user {
-      background: #0f172a;
-      color: #e5e7eb;
-      margin-left: auto;
-      border-top-right-radius: 4px;
-    }
-
-    .bubble-ai {
-      background: #eef2ff;
-      border-top-left-radius: 4px;
-      color: #111827;
-    }
-
-    .bubble-ai span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .bubble-ai span small {
-      font-size: 10px;
-      color: #6b7280;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .mock-note {
+    .mock-magic-line {
       font-size: 11px;
       color: #9ca3af;
-      margin-top: 4px;
+      margin-bottom: 2px;
     }
 
-    .mock-playlist {
+    .mock-body {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .playlist-card {
-      border-radius: 16px;
+    .input-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .speech-bubble {
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: #0f172a;
+      color: #e5e7eb;
+      font-size: 12px;
+      line-height: 1.5;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      max-width: 100%;
+    }
+
+    .speech-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .speech-text {
+      flex: 1;
+    }
+
+    .reflection-card {
+      border-radius: 14px;
       background: #f9fafb;
       border: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 9px 10px 10px;
+      padding: 9px 10px;
+      font-size: 11px;
+      color: var(--text-soft);
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .playlist-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 11px;
+    .reflection-card strong {
+      color: var(--text-main);
+      font-weight: 600;
     }
 
-    .playlist-name {
-      font-weight: 600;
-      color: var(--text-main);
-      display: inline-flex;
-      align-items: center;
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
       gap: 6px;
     }
 
-    .playlist-name span {
-      font-size: 13px;
-    }
-
-    .playlist-chip {
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: #dcfce7;
+    .chip-tag {
       font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #166534;
+      border-radius: var(--radius-pill);
+      padding: 3px 8px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(191, 219, 254, 0.9);
       white-space: nowrap;
     }
 
-    .playlist-items {
+    .playlist-heading {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .timeline-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .timeline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
+    }
+
+    .timeline-line {
+      flex: 1;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(148, 163, 184, 0.7), transparent);
+    }
+
+    .timeline-card {
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      padding: 8px 9px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .timeline-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 11px;
-      color: var(--text-soft);
-      line-height: 1.55;
+      color: var(--text-main);
+      gap: 6px;
+    }
+
+    .timeline-card-title {
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeline-card-chip {
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: #ecfdf3;
+      color: #166534;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .tile-list {
       display: flex;
       flex-direction: column;
       gap: 4px;
+      margin-top: 2px;
     }
 
-    .playlist-item {
+    .tile {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -466,22 +530,23 @@
       text-decoration: none;
       color: inherit;
       transition: box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
+      font-size: 11px;
     }
 
-    .playlist-item:hover {
+    .tile:hover {
       background: #eff6ff;
       box-shadow: 0 8px 18px rgba(148, 163, 184, 0.25);
       transform: translateY(-1px);
     }
 
-    .playlist-item-main {
+    .tile-main {
       display: flex;
       align-items: center;
       gap: 6px;
       flex: 1;
     }
 
-    .playlist-item-icon {
+    .tile-icon {
       width: 18px;
       height: 18px;
       border-radius: 999px;
@@ -493,26 +558,32 @@
       flex-shrink: 0;
     }
 
-    .playlist-item-text {
+    .tile-text {
       display: flex;
       flex-direction: column;
       gap: 1px;
     }
 
-    .playlist-item-text strong {
-      color: var(--text-main);
+    .tile-text strong {
       font-weight: 600;
+      color: var(--text-main);
     }
 
-    .playlist-item-text span {
-      font-size: 10px;
+    .tile-meta {
+      font-size: 9px;
       color: #9ca3af;
     }
 
-    .playlist-item-arrow {
+    .tile-arrow {
       font-size: 12px;
       color: #9ca3af;
       flex-shrink: 0;
+    }
+
+    .playlist-footer-note {
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 4px;
     }
 
     section {
@@ -647,6 +718,122 @@
       flex: 1;
     }
 
+    /* Example playlist blocks in lower sections */
+
+    .small-playlist-block {
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      padding: 12px 12px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .small-input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .small-speech {
+      border-radius: 14px;
+      padding: 8px 9px;
+      background: #0f172a;
+      color: #e5e7eb;
+      font-size: 11px;
+      line-height: 1.5;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 6px;
+      max-width: 100%;
+    }
+
+    .small-speech-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .small-reflection {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .small-reflection strong {
+      color: var(--text-main);
+    }
+
+    .small-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .small-tag {
+      font-size: 9px;
+      border-radius: var(--radius-pill);
+      padding: 2px 7px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(191, 219, 254, 0.9);
+    }
+
+    .small-step-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .small-tiles {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .small-tile {
+      border-radius: 999px;
+      padding: 6px 9px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      background: #ffffff;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .small-tile-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .small-tile-main strong {
+      color: var(--text-main);
+    }
+
+    .small-tile-meta {
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    .small-arrow {
+      font-size: 11px;
+      color: #9ca3af;
+      flex-shrink: 0;
+    }
+
     footer {
       border-top: 1px solid rgba(226, 232, 240, 0.9);
       padding: 18px 20px 26px;
@@ -713,19 +900,6 @@
       .two-column {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      /* Make Support Playlist single column on mobile to remove side gap */
-      .mock-body {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .mock-chat {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: 1px dashed rgba(203, 213, 225, 0.9);
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-      }
     }
   </style>
 </head>
@@ -786,6 +960,7 @@
         </div>
 
         <div class="hero-right">
+          <!-- Hero example playlist (Example A) -->
           <div class="mock">
             <div class="mock-header">
               <div class="mock-dots">
@@ -796,146 +971,181 @@
               <div class="mock-title">Support Playlist</div>
               <div class="mock-tag">Example view</div>
             </div>
+            <div class="mock-magic-line">
+              You say it out loud. A few seconds later, this is what comes back.
+            </div>
             <div class="mock-body">
-              <div class="mock-chat">
-                <div class="bubble bubble-user">
-                  I feel wired and exhausted. My head will not switch off and I start to worry about money towards the end of the month.
-                </div>
-                <div class="bubble bubble-ai">
-                  <span>
-                    Here is a Support Playlist for nights like this.
-                    <small>Curated, not clinical advice</small>
-                  </span>
-                </div>
-                <div class="mock-note">
-                  You mentioned stress, sleep, and money feeling tight towards the end of the month.
+              <div>
+                <div class="input-label">What someone says</div>
+                <div class="speech-bubble">
+                  <div class="speech-icon">🎙</div>
+                  <div class="speech-text">
+                    I am completely wiped. My head just will not switch off and I am already stressing about money by the end of the month. I feel like I am gonna snap.
+                  </div>
                 </div>
               </div>
-              <div class="mock-playlist">
-                <!-- Tonight -->
-                <div class="playlist-card">
-                  <div class="playlist-header">
-                    <div class="playlist-name">
-                      <span>🌙</span> 1. Tonight
+
+              <div class="reflection-card">
+                <div><strong>What we heard</strong></div>
+                <div>
+                  You sound overloaded. Tired, wired, and carrying money stress mostly on your own.
+                </div>
+                <div class="chips-row">
+                  <span class="chip-tag">Sleep</span>
+                  <span class="chip-tag">Stress</span>
+                  <span class="chip-tag">Money worries</span>
+                  <span class="chip-tag">Possibly feeling alone</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="playlist-heading">Here is a Support Playlist for nights like this.</div>
+                <div class="timeline">
+                  <!-- Tonight -->
+                  <div class="timeline-step">
+                    <div class="timeline-rail">
+                      <div class="timeline-dot"></div>
+                      <div class="timeline-line"></div>
                     </div>
-                    <div class="playlist-chip">Start here</div>
+                    <div class="timeline-card">
+                      <div class="timeline-card-header">
+                        <div class="timeline-card-title">
+                          <span>🌙</span> Tonight · Help your body settle
+                        </div>
+                        <div class="timeline-card-chip">Start here</div>
+                      </div>
+                      <div class="tile-list">
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">●</div>
+                            <div class="tile-text">
+                              <strong>Three minute landing track</strong>
+                              <span class="tile-meta">Short breathing audio to help your body settle.</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">☎</div>
+                            <div class="tile-text">
+                              <strong>Someone to listen tonight</strong>
+                              <span class="tile-meta">Call Samaritans 116 123 if it all feels too much. · Charity helpline</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">N</div>
+                            <div class="tile-text">
+                              <strong>Check your body, not your bank app</strong>
+                              <span class="tile-meta">A sixty second body scan to ease tension. · Digital tool</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div class="playlist-items">
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">●</div>
-                        <div class="playlist-item-text">
-                          <strong>3 minute breathing reset</strong>
-                          <span>Short audio to calm your body before bed.</span>
+
+                  <!-- Next few days -->
+                  <div class="timeline-step">
+                    <div class="timeline-rail">
+                      <div class="timeline-dot"></div>
+                      <div class="timeline-line"></div>
+                    </div>
+                    <div class="timeline-card">
+                      <div class="timeline-card-header">
+                        <div class="timeline-card-title">
+                          <span>☀️</span> Next few days · Take the pressure down a notch
                         </div>
+                        <div class="timeline-card-chip">Next few days</div>
                       </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">☎</div>
-                        <div class="playlist-item-text">
-                          <strong>Samaritans 116 123</strong>
-                          <span>Tap to call if it all feels too much.</span>
+                      <div class="tile-list">
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">🕊</div>
+                            <div class="tile-text">
+                              <strong>One guided sleep session</strong>
+                              <span class="tile-meta">Headspace or NHS Every Mind Matters, once each night. · Digital / NHS</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">£</div>
+                            <div class="tile-text">
+                              <strong>Look at one money thing</strong>
+                              <span class="tile-meta">A simple check on one bill or benefit, not all of them. · Citizens Advice / online tools</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">👤</div>
+                            <div class="tile-text">
+                              <strong>Tell one trusted person</strong>
+                              <span class="tile-meta">A short message to a friend or family member about how your week is really going. · Neighbourhood support</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Next few weeks -->
+                  <div class="timeline-step">
+                    <div class="timeline-rail">
+                      <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                      <div class="timeline-card-header">
+                        <div class="timeline-card-title">
+                          <span>🌱</span> Next few weeks · Share the load and plan ahead
                         </div>
+                        <div class="timeline-card-chip">Next few weeks</div>
                       </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">N</div>
-                        <div class="playlist-item-text">
-                          <strong>NHS 111 online</strong>
-                          <span>If you are worried about your health tonight.</span>
-                        </div>
+                      <div class="tile-list">
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">GP</div>
+                            <div class="tile-text">
+                              <strong>Talk to your GP team if…</strong>
+                              <span class="tile-meta">Sleep is still difficult most nights or worry is affecting your day. · NHS primary care</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">££</div>
+                            <div class="tile-text">
+                              <strong>Check work and money support</strong>
+                              <span class="tile-meta">Benefits, bills, and housing if money stress keeps building. · Council welfare / Citizens Advice</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
+                        <a href="#" class="tile">
+                          <div class="tile-main">
+                            <div class="tile-icon">★</div>
+                            <div class="tile-text">
+                              <strong>Build a tiny evening routine</strong>
+                              <span class="tile-meta">One thing that genuinely helps you unwind, three nights a week. · Self support</span>
+                            </div>
+                          </div>
+                          <div class="tile-arrow">›</div>
+                        </a>
                       </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
+                    </div>
                   </div>
                 </div>
-
-                <!-- Next few days -->
-                <div class="playlist-card">
-                  <div class="playlist-header">
-                    <div class="playlist-name">
-                      <span>☀️</span> 2. Over the next few days
-                    </div>
-                    <div class="playlist-chip">Next few days</div>
-                  </div>
-                  <div class="playlist-items">
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">🕊</div>
-                        <div class="playlist-item-text">
-                          <strong>Guided sleep session</strong>
-                          <span>Headspace or NHS Every Mind Matters, once each night.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">£</div>
-                        <div class="playlist-item-text">
-                          <strong>Money check in</strong>
-                          <span>Look at one bill or balance, not all of them at once.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">👤</div>
-                        <div class="playlist-item-text">
-                          <strong>Tell one trusted person</strong>
-                          <span>A short message about how your week has really been.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Next few weeks -->
-                <div class="playlist-card">
-                  <div class="playlist-header">
-                    <div class="playlist-name">
-                      <span>🌱</span> 3. Over the next few weeks
-                    </div>
-                    <div class="playlist-chip">Next few weeks</div>
-                  </div>
-                  <div class="playlist-items">
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">GP</div>
-                        <div class="playlist-item-text">
-                          <strong>Talk to your GP team</strong>
-                          <span>If sleep or worry are still affecting daily life.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">££</div>
-                        <div class="playlist-item-text">
-                          <strong>Citizens Advice or local money support</strong>
-                          <span>Help with debt, benefits, and plans for the end of the month.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                    <a href="#" class="playlist-item">
-                      <div class="playlist-item-main">
-                        <div class="playlist-item-icon">★</div>
-                        <div class="playlist-item-text">
-                          <strong>One small routine</strong>
-                          <span>Something that genuinely helps you unwind three nights a week.</span>
-                        </div>
-                      </div>
-                      <div class="playlist-item-arrow">›</div>
-                    </a>
-                  </div>
+                <div class="playlist-footer-note">
+                  You can keep this playlist, add to it, and share it with someone you trust.
                 </div>
               </div>
             </div>
@@ -972,7 +1182,7 @@
               Instead of a long list of links, the person receives a short playlist.  
               Immediate options. Local options. Follow up.  
               <br /><br />
-              Always grounded in real services. Local, national, digital.
+              Always grounded in real services. NHS, council, voluntary, digital, neighbourhood.
             </div>
           </div>
           <div class="card">
@@ -997,6 +1207,81 @@
             Designed for the situations we meet every week, from everyday pressures to more involved health journeys.  
             Support Playlists can sit inside the NHS App, practice websites, community hubs, or local campaigns.
           </p>
+        </div>
+
+        <!-- Example playlist B: caring for mum -->
+        <div class="small-playlist-block">
+          <div class="small-input-row">
+            <div class="input-label">What someone says</div>
+            <div class="small-speech">
+              <div class="small-speech-icon">🎙</div>
+              <div>
+                I am looking after my mum at home and I am just done in. I love her, but I am exhausted and I do not want to keep bothering the GP, they are already so busy.
+              </div>
+            </div>
+          </div>
+          <div class="small-reflection">
+            <strong>What we heard</strong><br />
+            You are caring for someone you love and running out of steam.
+          </div>
+          <div class="small-tags">
+            <span class="small-tag">Carer</span>
+            <span class="small-tag">Tired</span>
+            <span class="small-tag">Home support</span>
+            <span class="small-tag">Worried about asking for help</span>
+          </div>
+          <div>
+            <div class="small-step-title">This week · Share the caring load</div>
+            <div class="small-tiles">
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Talk to someone who understands caring</strong>
+                  <div class="small-tile-meta">A local carers organisation who can listen. · Local charity</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Ask about a carers assessment</strong>
+                  <div class="small-tile-meta">Help with breaks, equipment, and support for you. · Council / Family Hub</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Tell the GP team what this is really like</strong>
+                  <div class="small-tile-meta">They want to know early, not late. · NHS primary care / social prescriber</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="small-step-title">Next few weeks · Put support in place</div>
+            <div class="small-tiles">
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Neighbourhood coffee and chat</strong>
+                  <div class="small-tile-meta">A gentle way to meet other carers or families. · Community group</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Home help if things feel too much</strong>
+                  <div class="small-tile-meta">Short term support, equipment or welfare grants. · Council and voluntary sector</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Online carers forum</strong>
+                  <div class="small-tile-meta">Tips, reassurance, and not feeling alone at 2am. · Digital support</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="two-column" style="margin-bottom: 26px;">
@@ -1080,6 +1365,110 @@
           </p>
         </div>
 
+        <!-- Example playlist C: wrapping around a clinical pathway -->
+        <div class="small-playlist-block">
+          <div class="small-input-row">
+            <div class="input-label">Example · wrapping around a clinical pathway</div>
+            <div class="small-speech">
+              <div class="small-speech-icon">🎙</div>
+              <div>
+                They have found something and now I am just waiting for more tests. I am trying not to Google it, but my head is all over the place. I do not know what I am meant to do while I wait.
+              </div>
+            </div>
+          </div>
+          <div class="small-reflection">
+            <strong>What we heard</strong><br />
+            You are waiting, worried, and trying to hold it together without clear next steps.
+          </div>
+          <div class="small-tags">
+            <span class="small-tag">Waiting</span>
+            <span class="small-tag">Tests</span>
+            <span class="small-tag">Anxiety</span>
+            <span class="small-tag">Work and money</span>
+          </div>
+
+          <div>
+            <div class="small-step-title">While you are waiting</div>
+            <div class="small-tiles">
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>A phone line to talk through fears</strong>
+                  <div class="small-tile-meta">Someone trained to listen, without rushing you. · Cancer charity helpline</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Three questions for your next appointment</strong>
+                  <div class="small-tile-meta">A simple way to organise what you want to ask. · NHS information resource</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>If you feel suddenly unwell</strong>
+                  <div class="small-tile-meta">When to use NHS 111 or urgent care. · NHS urgent advice</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="small-step-title">On difficult days</div>
+            <div class="small-tiles">
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Grounding audio for anxious moments</strong>
+                  <div class="small-tile-meta">Two minutes to bring breathing down. · Digital tool</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Online support group</strong>
+                  <div class="small-tile-meta">Other people waiting for tests, sharing what helps. · Voluntary sector</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Check work and benefits</strong>
+                  <div class="small-tile-meta">If money or employment are adding pressure. · Citizens Advice / council welfare</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="small-step-title">If something changes suddenly</div>
+            <div class="small-tiles">
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Safety first guidance</strong>
+                  <div class="small-tile-meta">When to contact your GP team or specialist. · NHS primary and secondary care</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Urgent emotional support</strong>
+                  <div class="small-tile-meta">A real person, day or night. · Samaritans 116 123</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+              <div class="small-tile">
+                <div class="small-tile-main">
+                  <strong>Tell one trusted person you are waiting</strong>
+                  <div class="small-tile-meta">It is easier not to wait alone. · Neighbourhood / family</div>
+                </div>
+                <div class="small-arrow">›</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="two-column">
           <div class="list">
             <strong>Where Support Playlists can sit.</strong>
@@ -1087,7 +1476,7 @@
               <li>
                 <div class="list-bullet"></div>
                 <span>
-                  Inside the NHS App, as a way to turn a typed concern into a Support Playlist.
+                  Inside the NHS App, as a way to turn a typed or spoken concern into a Support Playlist.
                 </span>
               </li>
               <li>
