@@ -1,1553 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Support Playlists</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Support Playlists are simple, human sets of options that help people find the right kind of support at the right time."
-  />
+  <meta charset="UTF-8">
+  <title>Support Playlists · Emotional Architecture for Everyday Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
-      --bg: #f7fafc;
-      --bg-soft: #ffffff;
-      --accent: #4b9fff;
-      --accent-soft: #e1f0ff;
-      --accent-strong: #2563eb;
-      --accent-secondary: #10b981;
-      --text-main: #0f172a;
-      --text-soft: #64748b;
-      --border-subtle: #e2e8f0;
-      --card-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-pill: 999px;
-      --max-width: 1040px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", -apple-system, sans-serif;
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #e0f2fe 0, #f7fafc 40%, #f9fafb 100%);
-      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 16px 80px;
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(20px);
-      background: linear-gradient(
-        to bottom,
-        rgba(247, 250, 252, 0.92),
-        rgba(247, 250, 252, 0.75),
-        transparent
-      );
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 52px 0 40px;
     }
 
-    .nav {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 40%;
-      background: radial-gradient(circle at 30% 20%, #ffffff, #bfdbfe 45%, #60a5fa 100%);
-      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* Play icon */
-    .brand-mark::before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 11px solid #0f172a;
-      margin-left: 2px;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-name {
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: 0.02em;
-    }
-
-    .brand-tagline {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-soft);
-      padding: 6px 0;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-      transition: width 0.18s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .chip {
-      border-radius: var(--radius-pill);
-      padding: 6px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 12px;
-      color: var(--text-soft);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.75);
-    }
-
-    .chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 40% 30%, #ffffff, #34d399);
-      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.18);
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .hero {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 36px 20px 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.25fr);
-      gap: 36px;
-      align-items: flex-start;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: var(--radius-pill);
-      padding: 4px 10px 4px 4px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-      width: fit-content;
-    }
-
-    .hero-label-pill {
-      border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      font-size: 11px;
+    h1, h2, h3, h4 {
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: linear-gradient(90deg, #dbeafe, #ecfeff);
-      color: #1e293b;
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      line-height: 1.18;
+      margin: 0 0 12px;
     }
 
-    .hero-label-text {
-      font-size: 12px;
-      color: var(--text-soft);
+    h1 {
+      font-size: clamp(2.5rem, 3.4vw, 3.6rem);
+      letter-spacing: -0.04em;
     }
 
-    .hero-heading {
-      font-size: clamp(30px, 4vw, 40px);
-      line-height: 1.06;
-      letter-spacing: -0.03em;
+    h2 {
+      font-size: clamp(1.4rem, 2.1vw, 2rem);
+      margin-top: 28px;
     }
 
-    .hero-heading span {
-      background: linear-gradient(120deg, var(--accent-strong), var(--accent-secondary));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--text-soft);
-      max-width: 540px;
-    }
-
-    .hero-subtitle strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 6px;
-    }
-
-    .btn-primary {
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent-strong), #60a5fa);
-      color: #ffffff;
-      box-shadow: 0 18px 30px rgba(37, 99, 235, 0.35);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-    }
-
-    .btn-primary span {
-      font-size: 16px;
-    }
-
-    .btn-secondary {
-      border-radius: var(--radius-pill);
-      padding: 9px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-main);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-    }
-
-    .btn-secondary span {
-      font-size: 14px;
-    }
-
-    .hero-footnote {
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .hero-right {
-      position: relative;
-    }
-
-    /* Hero magic mock */
-
-    .mock {
-      border-radius: var(--radius-xl);
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: var(--card-shadow);
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .mock-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-bottom: 4px;
-    }
-
-    .mock-dots {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-    }
-
-    .mock-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #e5e7eb;
-    }
-
-    .mock-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .mock-tag {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: var(--radius-pill);
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .mock-magic-line {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 2px;
-    }
-
-    .mock-body {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .input-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #9ca3af;
-      margin-bottom: 4px;
-    }
-
-    .speech-bubble {
-      border-radius: 18px;
-      padding: 10px 12px;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-size: 12px;
-      line-height: 1.5;
-      display: inline-flex;
-      align-items: flex-start;
-      gap: 8px;
-      max-width: 100%;
-    }
-
-    .speech-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #f9fafb, #1d4ed8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-
-    .speech-text {
-      flex: 1;
-    }
-
-    .reflection-card {
-      border-radius: 14px;
-      background: #f9fafb;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 9px 10px;
-      font-size: 11px;
-      color: var(--text-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .reflection-card strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .chips-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .chip-tag {
-      font-size: 10px;
-      border-radius: var(--radius-pill);
-      padding: 3px 8px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid rgba(191, 219, 254, 0.9);
-      white-space: nowrap;
-    }
-
-    .playlist-heading {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .timeline-step {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .timeline-rail {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      margin-top: 2px;
-    }
-
-    .timeline-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
-    }
-
-    .timeline-line {
-      flex: 1;
-      width: 1px;
-      background: linear-gradient(to bottom, rgba(148, 163, 184, 0.7), transparent);
-    }
-
-    .timeline-card {
-      border-radius: 14px;
-      background: #f9fafb;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 8px 9px 9px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .timeline-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-main);
-      gap: 6px;
-    }
-
-    .timeline-card-title {
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .timeline-card-chip {
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: #ecfdf3;
-      color: #166534;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-
-    .tile-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 2px;
-    }
-
-    .tile {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 6px 9px;
-      border-radius: var(--radius-pill);
-      background: #ffffff;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      transition: box-shadow 0.15s ease, transform 0.15s ease, background 0.15s ease;
-      font-size: 11px;
-    }
-
-    .tile:hover {
-      background: #eff6ff;
-      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .tile-main {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-    }
-
-    .tile-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: #e0f2fe;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      flex-shrink: 0;
-    }
-
-    .tile-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .tile-text strong {
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .tile-meta {
-      font-size: 9px;
-      color: #9ca3af;
-    }
-
-    .tile-arrow {
-      font-size: 12px;
-      color: #9ca3af;
-      flex-shrink: 0;
-    }
-
-    .playlist-footer-note {
-      font-size: 10px;
-      color: #9ca3af;
-      margin-top: 4px;
-    }
-
-    section {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 10px 20px 40px;
-    }
-
-    .section-header {
-      margin-bottom: 18px;
-    }
-
-    .section-kicker {
-      font-size: 11px;
+    h3 {
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: #94a3b8;
-      margin-bottom: 4px;
-    }
-
-    .section-title {
-      font-size: 20px;
+      color: var(--muted);
       margin-bottom: 6px;
     }
 
-    .section-description {
-      font-size: 14px;
-      color: var(--text-soft);
-      max-width: 520px;
+    p {
+      margin: 0 0 14px;
+      font-size: 0.98rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 18px;
+    }
+
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      max-width: 640px;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .section {
+      padding: 26px 20px 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      margin-bottom: 22px;
+    }
+
+    .section.alt {
+      background: #ffffff;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 8px 0 4px;
+      font-size: 0.96rem;
+    }
+
+    .quote {
+      margin: 12px 0 6px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(148, 163, 184, 0.9);
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #111827;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
     }
 
-    .card {
-      border-radius: var(--radius-lg);
-      padding: 14px 14px 16px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 12px 30px rgba(148, 163, 184, 0.14);
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        padding-top: 36px;
+      }
+      .section {
+        padding: 22px 16px;
+      }
     }
 
-    .card-kicker {
-      font-size: 11px;
+    .label {
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #94a3b8;
-      margin-bottom: 4px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
     }
 
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text-main);
+    .footer-note {
+      margin-top: 34px;
+      font-size: 0.86rem;
+      color: var(--muted);
     }
 
-    .card-body {
-      font-size: 13px;
-      color: var(--text-soft);
-      line-height: 1.6;
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
+      margin: 10px 0 4px;
     }
 
     .pill {
-      border-radius: var(--radius-pill);
-      padding: 5px 11px;
-      font-size: 11px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid rgba(191, 219, 254, 0.9);
-      white-space: nowrap;
-    }
-
-    .pill-soft {
-      background: #ecfdf3;
-      color: #166534;
-      border-color: rgba(187, 247, 208, 0.9);
-    }
-
-    .pill-neutral {
-      background: #f3f4f6;
-      color: #4b5563;
-      border-color: #e5e7eb;
-    }
-
-    .two-column {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .list {
-      font-size: 13px;
-      color: var(--text-soft);
-      line-height: 1.7;
-    }
-
-    .list ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 6px;
-    }
-
-    .list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .list-bullet {
-      margin-top: 5px;
-      width: 6px;
-      height: 6px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
-      flex-shrink: 0;
-    }
-
-    .list li span {
-      flex: 1;
-    }
-
-    /* Example playlist blocks in lower sections */
-
-    .small-playlist-block {
-      border-radius: 18px;
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
       background: #ffffff;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
-      padding: 12px 12px 13px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .small-input-row {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .small-speech {
-      border-radius: 14px;
-      padding: 8px 9px;
-      background: #0f172a;
-      color: #e5e7eb;
-      font-size: 11px;
-      line-height: 1.5;
-      display: inline-flex;
-      align-items: flex-start;
-      gap: 6px;
-      max-width: 100%;
-    }
-
-    .small-speech-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #f9fafb, #1d4ed8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      flex-shrink: 0;
-    }
-
-    .small-reflection {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .small-reflection strong {
-      color: var(--text-main);
-    }
-
-    .small-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .small-tag {
-      font-size: 9px;
-      border-radius: var(--radius-pill);
-      padding: 2px 7px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid rgba(191, 219, 254, 0.9);
-    }
-
-    .small-step-title {
-      font-size: 11px;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .small-tiles {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .small-tile {
-      border-radius: 999px;
-      padding: 6px 9px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      background: #ffffff;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .small-tile-main {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .small-tile-main strong {
-      color: var(--text-main);
-    }
-
-    .small-tile-meta {
-      font-size: 9px;
-      color: #9ca3af;
-    }
-
-    .small-arrow {
-      font-size: 11px;
-      color: #9ca3af;
-      flex-shrink: 0;
-    }
-
-    footer {
-      border-top: 1px solid rgba(226, 232, 240, 0.9);
-      padding: 18px 20px 26px;
-      background: rgba(248, 250, 252, 0.95);
-      margin-top: 10px;
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .footer-inner a {
-      color: var(--text-soft);
-      text-decoration: none;
-    }
-
-    .footer-inner a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 840px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 24px;
-      }
-
-      .hero-left {
-        order: -1;
-      }
-
-      .hero-right {
-        order: 0;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        padding-inline: 14px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding-inline: 14px;
-      }
-
-      section {
-        padding-inline: 14px;
-      }
-
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .two-column {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <main>
     <header>
-      <div class="nav">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div class="brand-text">
-            <div class="brand-name">Support Playlists</div>
-            <div class="brand-tagline">Support that fits real life</div>
-          </div>
-        </div>
-        <div class="nav-links">
-          <a href="#how-it-works">How it works</a>
-          <a href="#examples">Examples</a>
-          <a href="#partners">For NHS and partners</a>
-          <div class="chip">
-            <div class="chip-dot"></div>
-            <span>Non clinical. Human. Local first.</span>
-          </div>
-        </div>
+      <div class="chip">
+        <span class="chip-dot"></span>
+        A new pattern for everyday support
+      </div>
+      <h1>Support Playlists</h1>
+      <p class="lead">
+        A simple pattern that turns what people actually say into small, humane next steps when they are not sure where to start.
+      </p>
+      <p class="tagline">
+        Not an app. Not a chatbot. A way for intelligence systems to listen, respond and guide without pretending to be a clinician or a friend.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Non clinical navigation intelligence</span>
+        <span class="pill">Emotional Architecture</span>
+        <span class="pill">Everyday uncertainty</span>
       </div>
     </header>
 
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <div class="hero-left">
-          <div class="hero-label">
-            <div class="hero-label-pill">Early access concept</div>
-            <div class="hero-label-text">A new way to guide people to support</div>
-          </div>
+    <section class="section">
+      <h3>The problem</h3>
+      <h2>People speak in fragments. Systems expect forms.</h2>
+      <p>
+        When life gets heavy or confusing, people rarely speak in neat categories. They speak in fragments, feelings and half formed thoughts.
+      </p>
+      <p class="quote">
+        "I am tired all the time. I keep dropping the ball. I feel like I am letting everyone down and I do not know what to fix first."
+      </p>
+      <p>
+        Most digital tools ask people to translate that into the system's language. Pick a topic. Choose a symptom. Select a journey.
+      </p>
+      <p>
+        Support Playlists starts from the opposite direction. The person talks the way they normally do. The system takes on the work of understanding and shaping a response.
+      </p>
+    </section>
 
-          <h1 class="hero-heading">
-            Not an app. Not a search bar.<br />
-            <span>Just the right support, in one playlist.</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            Support Playlists turn what someone says into a small, human set of options.  
-            <strong>Easy to understand. Easy to act on. Easy to share.</strong>
-            They work from everyday concerns to more complex journeys, without needing the right clinical words.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#examples" class="btn-primary">
-              Try a playlist example <span>↗</span>
-            </a>
-            <a href="#partners" class="btn-secondary">
-              For NHS and local partners <span>●</span>
-            </a>
-          </div>
-          <p class="hero-footnote">
-            Designed for everyday situations. From feeling low or anxious, to money worries or caring for someone at home.
-          </p>
-        </div>
-
-        <div class="hero-right">
-          <!-- Hero example playlist (Example A) -->
-          <div class="mock">
-            <div class="mock-header">
-              <div class="mock-dots">
-                <div class="mock-dot"></div>
-                <div class="mock-dot"></div>
-                <div class="mock-dot"></div>
-              </div>
-              <div class="mock-title">Support Playlist</div>
-              <div class="mock-tag">Example view</div>
-            </div>
-            <div class="mock-magic-line">
-              You say it out loud. A few seconds later, this is what comes back.
-            </div>
-            <div class="mock-body">
-              <div>
-                <div class="input-label">What someone says</div>
-                <div class="speech-bubble">
-                  <div class="speech-icon">🎙</div>
-                  <div class="speech-text">
-                    I am completely wiped. My head just will not switch off and I am already stressing about money by the end of the month. I feel like I am gonna snap.
-                  </div>
-                </div>
-              </div>
-
-              <div class="reflection-card">
-                <div><strong>What we heard</strong></div>
-                <div>
-                  You sound overloaded. Tired, wired, and carrying money stress mostly on your own.
-                </div>
-                <div class="chips-row">
-                  <span class="chip-tag">Sleep</span>
-                  <span class="chip-tag">Stress</span>
-                  <span class="chip-tag">Money worries</span>
-                  <span class="chip-tag">Possibly feeling alone</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="playlist-heading">Here is a Support Playlist for nights like this.</div>
-                <div class="timeline">
-                  <!-- Tonight -->
-                  <div class="timeline-step">
-                    <div class="timeline-rail">
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-line"></div>
-                    </div>
-                    <div class="timeline-card">
-                      <div class="timeline-card-header">
-                        <div class="timeline-card-title">
-                          <span>🌙</span> Tonight · Help your body settle
-                        </div>
-                        <div class="timeline-card-chip">Start here</div>
-                      </div>
-                      <div class="tile-list">
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">●</div>
-                            <div class="tile-text">
-                              <strong>Three minute landing track</strong>
-                              <span class="tile-meta">Short breathing audio to help your body settle.</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">☎</div>
-                            <div class="tile-text">
-                              <strong>Someone to listen tonight</strong>
-                              <span class="tile-meta">Call Samaritans 116 123 if it all feels too much. · Charity helpline</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">N</div>
-                            <div class="tile-text">
-                              <strong>Check your body, not your bank app</strong>
-                              <span class="tile-meta">A sixty second body scan to ease tension. · Digital tool</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Next few days -->
-                  <div class="timeline-step">
-                    <div class="timeline-rail">
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-line"></div>
-                    </div>
-                    <div class="timeline-card">
-                      <div class="timeline-card-header">
-                        <div class="timeline-card-title">
-                          <span>☀️</span> Next few days · Take the pressure down a notch
-                        </div>
-                        <div class="timeline-card-chip">Next few days</div>
-                      </div>
-                      <div class="tile-list">
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">🕊</div>
-                            <div class="tile-text">
-                              <strong>One guided sleep session</strong>
-                              <span class="tile-meta">Headspace or NHS Every Mind Matters, once each night. · Digital / NHS</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">£</div>
-                            <div class="tile-text">
-                              <strong>Look at one money thing</strong>
-                              <span class="tile-meta">A simple check on one bill or benefit, not all of them. · Citizens Advice / online tools</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">👤</div>
-                            <div class="tile-text">
-                              <strong>Tell one trusted person</strong>
-                              <span class="tile-meta">A short message to a friend or family member about how your week is really going. · Neighbourhood support</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Next few weeks -->
-                  <div class="timeline-step">
-                    <div class="timeline-rail">
-                      <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-card">
-                      <div class="timeline-card-header">
-                        <div class="timeline-card-title">
-                          <span>🌱</span> Next few weeks · Share the load and plan ahead
-                        </div>
-                        <div class="timeline-card-chip">Next few weeks</div>
-                      </div>
-                      <div class="tile-list">
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">GP</div>
-                            <div class="tile-text">
-                              <strong>Talk to your GP team if…</strong>
-                              <span class="tile-meta">Sleep is still difficult most nights or worry is affecting your day. · NHS primary care</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">££</div>
-                            <div class="tile-text">
-                              <strong>Check work and money support</strong>
-                              <span class="tile-meta">Benefits, bills, and housing if money stress keeps building. · Council welfare / Citizens Advice</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                        <a href="#" class="tile">
-                          <div class="tile-main">
-                            <div class="tile-icon">★</div>
-                            <div class="tile-text">
-                              <strong>Build a tiny evening routine</strong>
-                              <span class="tile-meta">One thing that genuinely helps you unwind, three nights a week. · Self support</span>
-                            </div>
-                          </div>
-                          <div class="tile-arrow">›</div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="playlist-footer-note">
-                  You can keep this playlist, add to it, and share it with someone you trust.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- How it works -->
-      <section id="how-it-works">
-        <div class="section-header">
-          <div class="section-kicker">How it works</div>
-          <h2 class="section-title">From what someone says, to a Support Playlist</h2>
-          <p class="section-description">
-            Support Playlists sit between daily life and clinical care. They do not diagnose. They help people see a path.
-          </p>
-        </div>
-        <div class="grid">
-          <div class="card">
-            <div class="card-kicker">Step 1</div>
-            <div class="card-title">Listen to the real story</div>
-            <div class="card-body">
-              Someone types or speaks in their own words.  
-              No medical language needed.  
-              <br /><br />
-              The system listens for patterns. Mood. Safety. Money. Caring. Housing. Connection.
-              <br /><br />
-              It understands when someone may be on a longer health journey, and shapes the support around that.
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-kicker">Step 2</div>
-            <div class="card-title">Curate, do not overwhelm</div>
-            <div class="card-body">
-              Instead of a long list of links, the person receives a short playlist.  
-              Immediate options. Local options. Follow up.  
-              <br /><br />
-              Always grounded in real services. NHS, council, voluntary, digital, neighbourhood.
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-kicker">Step 3</div>
-            <div class="card-title">Share and return</div>
-            <div class="card-body">
-              Each playlist can be saved, shared, and updated.  
-              With a friend. A family member. A support worker.  
-              <br /><br />
-              It becomes a living plan rather than a single leaflet.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Examples -->
-      <section id="examples">
-        <div class="section-header">
-          <div class="section-kicker">Examples</div>
-          <h2 class="section-title">Designed for the situations we meet every week</h2>
-          <p class="section-description">
-            Designed for the situations we meet every week, from everyday pressures to more involved health journeys.  
-            Support Playlists can sit inside the NHS App, practice websites, community hubs, or local campaigns.
-          </p>
-        </div>
-
-        <!-- Example playlist B: caring for mum -->
-        <div class="small-playlist-block">
-          <div class="small-input-row">
-            <div class="input-label">What someone says</div>
-            <div class="small-speech">
-              <div class="small-speech-icon">🎙</div>
-              <div>
-                I am looking after my mum at home and I am just done in. I love her, but I am exhausted and I do not want to keep bothering the GP, they are already so busy.
-              </div>
-            </div>
-          </div>
-          <div class="small-reflection">
-            <strong>What we heard</strong><br />
-            You are caring for someone you love and running out of steam.
-          </div>
-          <div class="small-tags">
-            <span class="small-tag">Carer</span>
-            <span class="small-tag">Tired</span>
-            <span class="small-tag">Home support</span>
-            <span class="small-tag">Worried about asking for help</span>
-          </div>
-          <div>
-            <div class="small-step-title">This week · Share the caring load</div>
-            <div class="small-tiles">
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Talk to someone who understands caring</strong>
-                  <div class="small-tile-meta">A local carers organisation who can listen. · Local charity</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Ask about a carers assessment</strong>
-                  <div class="small-tile-meta">Help with breaks, equipment, and support for you. · Council / Family Hub</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Tell the GP team what this is really like</strong>
-                  <div class="small-tile-meta">They want to know early, not late. · NHS primary care / social prescriber</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="small-step-title">Next few weeks · Put support in place</div>
-            <div class="small-tiles">
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Neighbourhood coffee and chat</strong>
-                  <div class="small-tile-meta">A gentle way to meet other carers or families. · Community group</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Home help if things feel too much</strong>
-                  <div class="small-tile-meta">Short term support, equipment or welfare grants. · Council and voluntary sector</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Online carers forum</strong>
-                  <div class="small-tile-meta">Tips, reassurance, and not feeling alone at 2am. · Digital support</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="two-column" style="margin-bottom: 26px;">
-          <div class="card">
-            <div class="card-kicker">Scenario</div>
-            <div class="card-title">Feeling low or anxious</div>
-            <div class="card-body">
-              A Support Playlist might include:
-              <div class="pill-row">
-                <span class="pill">Safe urgent support if you feel at risk</span>
-                <span class="pill">Local talking therapy or mental health support</span>
-                <span class="pill-soft">Everyday steps you can try yourself</span>
-                <span class="pill-neutral">When to contact your GP team</span>
-              </div>
-            </div>
-          </div>
-          <div class="list">
-            <strong>People do not need to know the right clinical term.</strong>  
-            They just need somewhere to start.  
-            <ul>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Respectful language that does not label the person.  
-                  Focused on what might help today and over the next few weeks.
-                </span>
-              </li>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Makes clear when to seek urgent help, and when a booked appointment is needed.
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="two-column">
-          <div class="card">
-            <div class="card-kicker">Scenario</div>
-            <div class="card-title">Leaving hospital and going home</div>
-            <div class="card-body">
-              A Support Playlist might include:
-              <div class="pill-row">
-                <span class="pill">Who to phone if you are worried tonight</span>
-                <span class="pill-soft">Local voluntary support and check in services</span>
-                <span class="pill-neutral">Help with shopping, money or equipment</span>
-                <span class="pill">When to ask for more help from your GP or hospital team</span>
-              </div>
-            </div>
-          </div>
-          <div class="list">
-            <strong>Recovery is not only clinical.</strong>  
-            People also need food, friendship, and confidence.  
-            <ul>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Support Playlists give carers and family a clear picture of how to help.
-                </span>
-              </li>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  They can be shared in a ward, in a GP practice, or by a volunteer on the doorstep.
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Partners -->
-      <section id="partners">
-        <div class="section-header">
-          <div class="section-kicker">For NHS and local partners</div>
-          <h2 class="section-title">A new layer for smart, human triage</h2>
-          <p class="section-description">
-            Support Playlists do not replace clinical systems. They sit alongside them, making it easier for people to reach the right kind of help earlier.
-            They can also wrap around existing pathways, offering the emotional, practical and social support that clinical routes cannot hold alone.
-          </p>
-        </div>
-
-        <!-- Example playlist C: wrapping around a clinical pathway -->
-        <div class="small-playlist-block">
-          <div class="small-input-row">
-            <div class="input-label">Example · wrapping around a clinical pathway</div>
-            <div class="small-speech">
-              <div class="small-speech-icon">🎙</div>
-              <div>
-                They have found something and now I am just waiting for more tests. I am trying not to Google it, but my head is all over the place. I do not know what I am meant to do while I wait.
-              </div>
-            </div>
-          </div>
-          <div class="small-reflection">
-            <strong>What we heard</strong><br />
-            You are waiting, worried, and trying to hold it together without clear next steps.
-          </div>
-          <div class="small-tags">
-            <span class="small-tag">Waiting</span>
-            <span class="small-tag">Tests</span>
-            <span class="small-tag">Anxiety</span>
-            <span class="small-tag">Work and money</span>
-          </div>
-
-          <div>
-            <div class="small-step-title">While you are waiting</div>
-            <div class="small-tiles">
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>A phone line to talk through fears</strong>
-                  <div class="small-tile-meta">Someone trained to listen, without rushing you. · Cancer charity helpline</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Three questions for your next appointment</strong>
-                  <div class="small-tile-meta">A simple way to organise what you want to ask. · NHS information resource</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>If you feel suddenly unwell</strong>
-                  <div class="small-tile-meta">When to use NHS 111 or urgent care. · NHS urgent advice</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="small-step-title">On difficult days</div>
-            <div class="small-tiles">
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Grounding audio for anxious moments</strong>
-                  <div class="small-tile-meta">Two minutes to bring breathing down. · Digital tool</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Online support group</strong>
-                  <div class="small-tile-meta">Other people waiting for tests, sharing what helps. · Voluntary sector</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Check work and benefits</strong>
-                  <div class="small-tile-meta">If money or employment are adding pressure. · Citizens Advice / council welfare</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="small-step-title">If something changes suddenly</div>
-            <div class="small-tiles">
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Safety first guidance</strong>
-                  <div class="small-tile-meta">When to contact your GP team or specialist. · NHS primary and secondary care</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Urgent emotional support</strong>
-                  <div class="small-tile-meta">A real person, day or night. · Samaritans 116 123</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-              <div class="small-tile">
-                <div class="small-tile-main">
-                  <strong>Tell one trusted person you are waiting</strong>
-                  <div class="small-tile-meta">It is easier not to wait alone. · Neighbourhood / family</div>
-                </div>
-                <div class="small-arrow">›</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="two-column">
-          <div class="list">
-            <strong>Where Support Playlists can sit.</strong>
-            <ul>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Inside the NHS App, as a way to turn a typed or spoken concern into a Support Playlist.
-                </span>
-              </li>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  On primary care and PCN websites, as a soft front door to non clinical support.
-                </span>
-              </li>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  As QR codes in waiting rooms, libraries, schools, workplaces, and community venues.
-                </span>
-              </li>
-            </ul>
-
-            <br />
-            <strong>What this can help with.</strong>
-            <ul>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Shaping demand before it reaches clinical triage.  
-                  Some needs are better met by community, money, housing or emotional support.
-                </span>
-              </li>
-              <li>
-                <div class="list-bullet"></div>
-                <span>
-                  Giving staff a simple, trusted thing to send people. One link, many options.
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="card-kicker">Safety and design</div>
-            <div class="card-title">Built for emotional and digital safety</div>
-            <div class="card-body">
-              Support Playlists are being developed with:
-              <ul style="list-style: none; padding-left: 0; margin-top: 8px;">
-                <li style="margin-bottom: 6px;">
-                  • Clear guard rails around clinical advice and risk.
-                </li>
-                <li style="margin-bottom: 6px;">
-                  • Local curation, so partners can shape what appears in each area.
-                </li>
-                <li style="margin-bottom: 6px;">
-                  • Plain language that fits a wide range of reading ages.
-                </li>
-                <li>
-                  • A focus on emotional tone. People should feel understood, not judged.
-                </li>
-              </ul>
-              <br />
-              To explore pilots or collaboration, you can get in touch and describe your area, population, and digital set up.
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="footer-inner">
-        <div>Support Playlists · Early concept preview</div>
+    <section class="section alt">
+      <h3>The pattern</h3>
+      <h2>From raw language to a small set of next steps</h2>
+      <p>
+        Support Playlists is a pattern for how a system can respond when someone describes what is going on in their own words. It does not diagnose. It does not score. It simply offers a tiny, structured path.
+      </p>
+      <div class="grid" style="margin-top: 6px;">
         <div>
-          Built in partnership with neighbourhoods and health teams.  
-          <a href="mailto:hello@neighbourhoodcolab.co.uk">Contact</a>
+          <p class="label">Input</p>
+          <p>
+            Natural speech or text. Messy, emotional and unstructured. No tags. No labels. Just what someone would say if you asked "How are you, really?"
+          </p>
+          <p class="label" style="margin-top: 10px;">Understanding</p>
+          <p>
+            A model infers a little about emotional colour, energy level and time pressure. It is not trying to name a condition. It is only trying to be kind and proportionate.
+          </p>
+        </div>
+        <div>
+          <p class="label">Output</p>
+          <p>
+            A Support Playlist. Four short pieces.
+          </p>
+          <ul>
+            <li><strong>Tonight</strong> - one grounding action that fits their state</li>
+            <li><strong>Next</strong> - one realistic step over the coming days</li>
+            <li><strong>Support</strong> - one way to widen the circle around them</li>
+            <li><strong>Escalate</strong> - one clear suggestion if things get worse</li>
+          </ul>
+          <p>
+            Small enough to remember. Gentle enough to act on. Clear enough to be safe.
+          </p>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="section">
+      <h3>The discipline</h3>
+      <h2>Emotional Architecture</h2>
+      <p>
+        Support Playlists sits on a design discipline we call <strong>Emotional Architecture</strong>. It treats conversations with an intelligent system as emotional spaces that need structure, not just logic.
+      </p>
+      <p>
+        Emotional Architecture asks questions like:
+      </p>
+      <ul>
+        <li>How does a system acknowledge what someone has said without pretending to feel in the way a human would</li>
+        <li>What tone feels steady and reassuring rather than chirpy or cold</li>
+        <li>How much suggestion is helpful before it becomes pressure or noise</li>
+        <li>Where are the hard edges of scope, and how can you say no without breaking trust</li>
+      </ul>
+      <p>
+        In technical terms, Emotional Architecture is a set of constraints, grammars and safety rules that sit around a model. In human terms, it is what makes an agent feel like a calm, clearly bounded presence rather than another demanding interface.
+      </p>
+    </section>
+
+    <section class="section alt">
+      <h3>Where it fits</h3>
+      <h2>A non clinical layer for everyday uncertainty</h2>
+      <p>
+        Support Playlists is not a clinical tool. It is not a triage engine and it does not belong inside diagnostic pathways.
+      </p>
+      <p>
+        It is a non clinical navigation layer that can sit:
+      </p>
+      <ul>
+        <li>around wellbeing and self care products</li>
+        <li>inside neighbourhood or community platforms</li>
+        <li>next to mental health content without trying to be therapy</li>
+        <li>in any setting where people arrive with "something is wrong, but I am not sure what"</li>
+      </ul>
+      <p>
+        The focus is simple. Help people feel a little less alone and a little more oriented, before they decide what to do next.
+      </p>
+    </section>
+
+    <section class="section">
+      <h3>Safety and scope</h3>
+      <h2>What it does not do</h2>
+      <p>
+        The safest part of Support Playlists is the role it refuses to play.
+      </p>
+      <p><strong>It does not:</strong></p>
+      <ul>
+        <li>diagnose or label conditions</li>
+        <li>interpret or score symptoms</li>
+        <li>replace professional judgement</li>
+        <li>promise crisis support or emergency response</li>
+      </ul>
+      <p><strong>Instead, it:</strong></p>
+      <ul>
+        <li>works from a bounded, verified set of resources and ideas</li>
+        <li>keeps suggestions small, concrete and reversible</li>
+        <li>uses simple, inspectable structures like "Tonight, Next, Support, Escalate"</li>
+        <li>stays honest about what it can and cannot hold</li>
+      </ul>
+    </section>
+
+    <section class="section alt">
+      <h3>State of the work</h3>
+      <h2>Early, real and still unfolding</h2>
+      <p>
+        Support Playlists is not a finished product. It is an active piece of work.
+      </p>
+      <ul>
+        <li>There is a small prototype running in one local area, using real services and content.</li>
+        <li>The pattern has been tested with non clinical scenarios first.</li>
+        <li>The emotional and safety boundaries are being shaped with practitioners in mind.</li>
+      </ul>
+      <p>
+        The work moves quickly at the conceptual layer. The open question, which we are honest about, is how to scale a pattern like this responsibly and in partnership with others.
+      </p>
+    </section>
+
+    <section class="section">
+      <h3>Who is behind it</h3>
+      <h2>Origins and team</h2>
+      <p>
+        Support Playlists and Emotional Architecture are being developed in the south of England by Mark Winterburn, whose background is in psychology, political philosophy and storytelling.
+      </p>
+      <p>
+        The ideas are shaped within a small circle of people who have known each other since childhood, a clinical psychologist, a nurse and a social worker. That long standing trust and multidisciplinary mix helps keep the work grounded in real life rather than abstract theory.
+      </p>
+    </section>
+
+    <section class="section alt">
+      <h3>Invitation</h3>
+      <h2>For collaborators, partners and critics</h2>
+      <p>
+        If you are working on personal intelligence, wellbeing products, neighbourhood support or new navigation layers, you may recognise some of the patterns described here.
+      </p>
+      <p>
+        We are interested in conversations with:
+      </p>
+      <ul>
+        <li>people building agents or conversational systems who care about emotional safety</li>
+        <li>teams exploring non clinical support around health, work or money</li>
+        <li>researchers and designers who share an interest in how people express uncertainty</li>
+      </ul>
+      <p>
+        There is no sign up button and nothing here is for sale. If this resonates and you would like to talk, you can reach Mark at:
+      </p>
+      <p class="muted">
+        <a href="mailto:mark@supportplaylists.com">mark@supportplaylists.com</a>
+      </p>
+    </section>
+
+    <p class="footer-note">
+      Support Playlists is part of a wider body of work on Emotional Architecture and non clinical navigation intelligence. This page is a public sketch of an idea that is still evolving.
+    </p>
+  </main>
 </body>
 </html>
